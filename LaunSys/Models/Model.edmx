@@ -1,0 +1,1768 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LaunSysDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tb_Branch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Branchname" Type="varchar" MaxLength="50" />
+          <Property Name="Branchcode" Type="varchar" MaxLength="50" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="150" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="Coycode" Type="varchar" MaxLength="50" />
+          <Property Name="Createdon" Type="datetime" />
+          <Property Name="Createdby" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cityname" Type="varchar" MaxLength="50" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Countryname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Customers">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleID" Type="int" />
+          <Property Name="SurName" Type="varchar" MaxLength="150" />
+          <Property Name="OtherNames" Type="varchar" MaxLength="150" />
+          <Property Name="GenderID" Type="int" />
+          <Property Name="Cust_Address" Type="varchar" MaxLength="150" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsNotActive" Type="bit" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Deptname" Type="varchar" MaxLength="50" />
+          <Property Name="Appraisalcenter" Type="varchar" MaxLength="50" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="CoyCode" Type="varchar" MaxLength="50" />
+          <Property Name="Deptcode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Division">
+          <Key>
+            <PropertyRef Name="DivisionId" />
+          </Key>
+          <Property Name="DivisionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Divisionname" Type="varchar" MaxLength="50" />
+          <Property Name="MIScode" Type="varchar" MaxLength="50" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Expenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Exp_SN" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Inv_No" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_FabricDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Cust_Name" Type="nvarchar(max)" />
+          <Property Name="Tot_Fabric" Type="int" />
+          <Property Name="Inv_No" Type="nvarchar(max)" />
+          <Property Name="Fab_SN" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Label" Type="nvarchar(max)" />
+          <Property Name="BranchId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gendername" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Income">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Inc_SN" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Inv_No" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_IncomingFabric">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="DateSN" Type="int" />
+          <Property Name="Cust_Name" Type="nvarchar(max)" />
+          <Property Name="Inv_No" Type="nvarchar(max)" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="BranchId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_LGA">
+          <Key>
+            <PropertyRef Name="LGAId" />
+          </Key>
+          <Property Name="LGAId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LGAname" Type="varchar" MaxLength="50" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Regionname" Type="varchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rolename" Type="varchar" MaxLength="50" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Statename" Type="varchar" MaxLength="50" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Titles">
+          <Key>
+            <PropertyRef Name="TitleID" />
+          </Key>
+          <Property Name="TitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="DivisionId" Type="int" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="DeptId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <Association Name="FK_tb_Branch_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Branch_tb_LGA">
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_LGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Branch_tb_State">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Branch_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_City_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_City_tb_LGA">
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="0..1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_LGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_City_tb_State">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="0..1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customers_tb_Gender">
+          <End Role="tb_Gender" Type="Self.tb_Gender" Multiplicity="0..1" />
+          <End Role="tb_Customers" Type="Self.tb_Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="tb_Customers">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customers_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Customers" Type="Self.tb_Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Customers">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customers_tb_Titles">
+          <End Role="tb_Titles" Type="Self.tb_Titles" Multiplicity="0..1" />
+          <End Role="tb_Customers" Type="Self.tb_Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Titles">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="tb_Customers">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Department_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Department" Type="Self.tb_Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Department">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Division_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Division" Type="Self.tb_Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Division">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Expenses_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_Expenses" Type="Self.tb_Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_Expenses">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Expenses_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Expenses" Type="Self.tb_Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Expenses">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_FabricDescription_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_FabricDescription" Type="Self.tb_FabricDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_FabricDescription">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Income_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_Income" Type="Self.tb_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_Income">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Income_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Income" Type="Self.tb_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Income">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_IncomingFabric_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_IncomingFabric" Type="Self.tb_IncomingFabric" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_IncomingFabric">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_LGA_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_LGA">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_LGA_tb_State">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="0..1" />
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tb_LGA">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_LGA_tb_Status1">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_LGA">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Region_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Region" Type="Self.tb_Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Region">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Role_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Role" Type="Self.tb_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Role">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_State_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_State_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_State">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Titles_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Titles" Type="Self.tb_Titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Titles">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Department">
+          <End Role="tb_Department" Type="Self.tb_Department" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Division">
+          <End Role="tb_Division" Type="Self.tb_Division" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Division">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Role">
+          <End Role="tb_Role" Type="Self.tb_Role" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LaunSysDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Branch" EntityType="Self.tb_Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_City" EntityType="Self.tb_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Country" EntityType="Self.tb_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Customers" EntityType="Self.tb_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Department" EntityType="Self.tb_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Division" EntityType="Self.tb_Division" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Expenses" EntityType="Self.tb_Expenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_FabricDescription" EntityType="Self.tb_FabricDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Gender" EntityType="Self.tb_Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Income" EntityType="Self.tb_Income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_IncomingFabric" EntityType="Self.tb_IncomingFabric" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_LGA" EntityType="Self.tb_LGA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Region" EntityType="Self.tb_Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Role" EntityType="Self.tb_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_State" EntityType="Self.tb_State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Status" EntityType="Self.tb_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Titles" EntityType="Self.tb_Titles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Users" EntityType="Self.tb_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_Branch_tb_Country" Association="Self.FK_tb_Branch_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Branch_tb_LGA" Association="Self.FK_tb_Branch_tb_LGA">
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Branch_tb_State" Association="Self.FK_tb_Branch_tb_State">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Branch_tb_Status" Association="Self.FK_tb_Branch_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_City_tb_Country" Association="Self.FK_tb_City_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_City_tb_LGA" Association="Self.FK_tb_City_tb_LGA">
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_City_tb_State" Association="Self.FK_tb_City_tb_State">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customers_tb_Gender" Association="Self.FK_tb_Customers_tb_Gender">
+            <End Role="tb_Gender" EntitySet="tb_Gender" />
+            <End Role="tb_Customers" EntitySet="tb_Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customers_tb_Status" Association="Self.FK_tb_Customers_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Customers" EntitySet="tb_Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customers_tb_Titles" Association="Self.FK_tb_Customers_tb_Titles">
+            <End Role="tb_Titles" EntitySet="tb_Titles" />
+            <End Role="tb_Customers" EntitySet="tb_Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Department_tb_Status" Association="Self.FK_tb_Department_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Department" EntitySet="tb_Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Division_tb_Status" Association="Self.FK_tb_Division_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Division" EntitySet="tb_Division" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Expenses_tb_Branch" Association="Self.FK_tb_Expenses_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_Expenses" EntitySet="tb_Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Expenses_tb_Status" Association="Self.FK_tb_Expenses_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Expenses" EntitySet="tb_Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_FabricDescription_tb_Branch" Association="Self.FK_tb_FabricDescription_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_FabricDescription" EntitySet="tb_FabricDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Income_tb_Branch" Association="Self.FK_tb_Income_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_Income" EntitySet="tb_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Income_tb_Status" Association="Self.FK_tb_Income_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Income" EntitySet="tb_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_IncomingFabric_tb_Branch" Association="Self.FK_tb_IncomingFabric_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_IncomingFabric" EntitySet="tb_IncomingFabric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_LGA_tb_Country" Association="Self.FK_tb_LGA_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_LGA_tb_State" Association="Self.FK_tb_LGA_tb_State">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_LGA_tb_Status1" Association="Self.FK_tb_LGA_tb_Status1">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Region_tb_Status" Association="Self.FK_tb_Region_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Region" EntitySet="tb_Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Role_tb_Status" Association="Self.FK_tb_Role_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Role" EntitySet="tb_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_State_tb_Country" Association="Self.FK_tb_State_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_State" EntitySet="tb_State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_State_tb_Status" Association="Self.FK_tb_State_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_State" EntitySet="tb_State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Titles_tb_Status" Association="Self.FK_tb_Titles_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Titles" EntitySet="tb_Titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Branch" Association="Self.FK_tb_Users_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Department" Association="Self.FK_tb_Users_tb_Department">
+            <End Role="tb_Department" EntitySet="tb_Department" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Division" Association="Self.FK_tb_Users_tb_Division">
+            <End Role="tb_Division" EntitySet="tb_Division" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Role" Association="Self.FK_tb_Users_tb_Role">
+            <End Role="tb_Role" EntitySet="tb_Role" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Status" Association="Self.FK_tb_Users_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LaunSysDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tb_Branch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Branchname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Branchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="Coycode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Createdon" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" />
+          <NavigationProperty Name="tb_Country" Relationship="Self.FK_tb_Branch_tb_Country" FromRole="tb_Branch" ToRole="tb_Country" />
+          <NavigationProperty Name="tb_LGA" Relationship="Self.FK_tb_Branch_tb_LGA" FromRole="tb_Branch" ToRole="tb_LGA" />
+          <NavigationProperty Name="tb_State" Relationship="Self.FK_tb_Branch_tb_State" FromRole="tb_Branch" ToRole="tb_State" />
+          <NavigationProperty Name="tb_Status" Relationship="Self.FK_tb_Branch_tb_Status" FromRole="tb_Branch" ToRole="tb_Status" />
+          <NavigationProperty Name="tb_Expenses" Relationship="Self.FK_tb_Expenses_tb_Branch" FromRole="tb_Branch" ToRole="tb_Expenses" />
+          <NavigationProperty Name="tb_FabricDescription" Relationship="Self.FK_tb_FabricDescription_tb_Branch" FromRole="tb_Branch" ToRole="tb_FabricDescription" />
+          <NavigationProperty Name="tb_Income" Relationship="Self.FK_tb_Income_tb_Branch" FromRole="tb_Branch" ToRole="tb_Income" />
+          <NavigationProperty Name="tb_IncomingFabric" Relationship="Self.FK_tb_IncomingFabric_tb_Branch" FromRole="tb_Branch" ToRole="tb_IncomingFabric" />
+          <NavigationProperty Name="tb_Users" Relationship="LaunSysDBModel.FK_tb_Users_tb_Branch" FromRole="tb_Branch" ToRole="tb_Users" />
+        </EntityType>
+        <EntityType Name="tb_City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cityname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="tb_Country" Relationship="Self.FK_tb_City_tb_Country" FromRole="tb_City" ToRole="tb_Country" />
+          <NavigationProperty Name="tb_LGA" Relationship="Self.FK_tb_City_tb_LGA" FromRole="tb_City" ToRole="tb_LGA" />
+          <NavigationProperty Name="tb_State" Relationship="Self.FK_tb_City_tb_State" FromRole="tb_City" ToRole="tb_State" />
+        </EntityType>
+        <EntityType Name="tb_Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Countryname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_Branch_tb_Country" FromRole="tb_Country" ToRole="tb_Branch" />
+          <NavigationProperty Name="tb_City" Relationship="Self.FK_tb_City_tb_Country" FromRole="tb_Country" ToRole="tb_City" />
+          <NavigationProperty Name="tb_LGA" Relationship="Self.FK_tb_LGA_tb_Country" FromRole="tb_Country" ToRole="tb_LGA" />
+          <NavigationProperty Name="tb_State" Relationship="Self.FK_tb_State_tb_Country" FromRole="tb_Country" ToRole="tb_State" />
+        </EntityType>
+        <EntityType Name="tb_Customers">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleID" Type="Int32" />
+          <Property Name="SurName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="OtherNames" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GenderID" Type="Int32" />
+          <Property Name="Cust_Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsNotActive" Type="Boolean" />
+          <NavigationProperty Name="tb_Gender" Relationship="Self.FK_tb_Customers_tb_Gender" FromRole="tb_Customers" ToRole="tb_Gender" />
+          <NavigationProperty Name="tb_Titles" Relationship="Self.FK_tb_Customers_tb_Titles" FromRole="tb_Customers" ToRole="tb_Titles" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Customers_tb_Status" FromRole="tb_Customers" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Deptname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Appraisalcenter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CoyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Deptcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Department_tb_Status" FromRole="tb_Department" ToRole="tb_Status" />
+          <NavigationProperty Name="tb_Users" Relationship="LaunSysDBModel.FK_tb_Users_tb_Department" FromRole="tb_Department" ToRole="tb_Users" />
+        </EntityType>
+        <EntityType Name="tb_Division">
+          <Key>
+            <PropertyRef Name="DivisionId" />
+          </Key>
+          <Property Name="DivisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Divisionname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MIScode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Users" Relationship="Self.FK_tb_Users_tb_Division" FromRole="tb_Division" ToRole="tb_Users" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Division_tb_Status" FromRole="tb_Division" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_Expenses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Exp_SN" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Inv_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BranchId" Type="Int32" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_Expenses_tb_Branch" FromRole="tb_Expenses" ToRole="tb_Branch" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Expenses_tb_Status" FromRole="tb_Expenses" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_FabricDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Cust_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tot_Fabric" Type="Int32" />
+          <Property Name="Inv_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fab_SN" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="Int32" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_FabricDescription_tb_Branch" FromRole="tb_FabricDescription" ToRole="tb_Branch" />
+        </EntityType>
+        <EntityType Name="tb_Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gendername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Customers" Relationship="Self.FK_tb_Customers_tb_Gender" FromRole="tb_Gender" ToRole="tb_Customers" />
+        </EntityType>
+        <EntityType Name="tb_Income">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Inc_SN" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Inv_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BranchId" Type="Int32" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_Income_tb_Branch" FromRole="tb_Income" ToRole="tb_Branch" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Income_tb_Status" FromRole="tb_Income" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_IncomingFabric">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="DateSN" Type="Int32" />
+          <Property Name="Cust_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Inv_No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BranchId" Type="Int32" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_IncomingFabric_tb_Branch" FromRole="tb_IncomingFabric" ToRole="tb_Branch" />
+        </EntityType>
+        <EntityType Name="tb_LGA">
+          <Key>
+            <PropertyRef Name="LGAId" />
+          </Key>
+          <Property Name="LGAId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LGAname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_Branch_tb_LGA" FromRole="tb_LGA" ToRole="tb_Branch" />
+          <NavigationProperty Name="tb_City" Relationship="Self.FK_tb_City_tb_LGA" FromRole="tb_LGA" ToRole="tb_City" />
+          <NavigationProperty Name="tb_Country" Relationship="Self.FK_tb_LGA_tb_Country" FromRole="tb_LGA" ToRole="tb_Country" />
+          <NavigationProperty Name="tb_State" Relationship="Self.FK_tb_LGA_tb_State" FromRole="tb_LGA" ToRole="tb_State" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_LGA_tb_Status1" FromRole="tb_LGA" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Regionname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Region_tb_Status" FromRole="tb_Region" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rolename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Users" Relationship="Self.FK_tb_Users_tb_Role" FromRole="tb_Role" ToRole="tb_Users" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Role_tb_Status" FromRole="tb_Role" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Statename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_Branch_tb_State" FromRole="tb_State" ToRole="tb_Branch" />
+          <NavigationProperty Name="tb_City" Relationship="Self.FK_tb_City_tb_State" FromRole="tb_State" ToRole="tb_City" />
+          <NavigationProperty Name="tb_Country" Relationship="Self.FK_tb_State_tb_Country" FromRole="tb_State" ToRole="tb_Country" />
+          <NavigationProperty Name="tb_LGA" Relationship="Self.FK_tb_LGA_tb_State" FromRole="tb_State" ToRole="tb_LGA" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_State_tb_Status" FromRole="tb_State" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Branch" Relationship="Self.FK_tb_Branch_tb_Status" FromRole="tb_Status" ToRole="tb_Branch" />
+          <NavigationProperty Name="tb_Users" Relationship="Self.FK_tb_Users_tb_Status" FromRole="tb_Status" ToRole="tb_Users" />
+          <NavigationProperty Name="tb_Division" Relationship="LaunSysDBModel.FK_tb_Division_tb_Status" FromRole="tb_Status" ToRole="tb_Division" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="tb_Customers" Relationship="LaunSysDBModel.FK_tb_Customers_tb_Status" FromRole="tb_Status" ToRole="tb_Customers" />
+          <NavigationProperty Name="tb_Department" Relationship="LaunSysDBModel.FK_tb_Department_tb_Status" FromRole="tb_Status" ToRole="tb_Department" />
+          <NavigationProperty Name="tb_LGA" Relationship="LaunSysDBModel.FK_tb_LGA_tb_Status1" FromRole="tb_Status" ToRole="tb_LGA" />
+          <NavigationProperty Name="tb_Region" Relationship="LaunSysDBModel.FK_tb_Region_tb_Status" FromRole="tb_Status" ToRole="tb_Region" />
+          <NavigationProperty Name="tb_Role" Relationship="LaunSysDBModel.FK_tb_Role_tb_Status" FromRole="tb_Status" ToRole="tb_Role" />
+          <NavigationProperty Name="tb_State" Relationship="LaunSysDBModel.FK_tb_State_tb_Status" FromRole="tb_Status" ToRole="tb_State" />
+          <NavigationProperty Name="tb_Titles" Relationship="LaunSysDBModel.FK_tb_Titles_tb_Status" FromRole="tb_Status" ToRole="tb_Titles" />
+          <NavigationProperty Name="tb_Income" Relationship="LaunSysDBModel.FK_tb_Income_tb_Status" FromRole="tb_Status" ToRole="tb_Income" />
+          <NavigationProperty Name="tb_Expenses" Relationship="LaunSysDBModel.FK_tb_Expenses_tb_Status" FromRole="tb_Status" ToRole="tb_Expenses" />
+        </EntityType>
+        <EntityType Name="tb_Titles">
+          <Key>
+            <PropertyRef Name="TitleID" />
+          </Key>
+          <Property Name="TitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_Customers" Relationship="Self.FK_tb_Customers_tb_Titles" FromRole="tb_Titles" ToRole="tb_Customers" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Status" Relationship="LaunSysDBModel.FK_tb_Titles_tb_Status" FromRole="tb_Titles" ToRole="tb_Status" />
+        </EntityType>
+        <EntityType Name="tb_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="DivisionId" Type="Int32" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="DeptId" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="tb_Division" Relationship="Self.FK_tb_Users_tb_Division" FromRole="tb_Users" ToRole="tb_Division" />
+          <NavigationProperty Name="tb_Role" Relationship="Self.FK_tb_Users_tb_Role" FromRole="tb_Users" ToRole="tb_Role" />
+          <NavigationProperty Name="tb_Status" Relationship="Self.FK_tb_Users_tb_Status" FromRole="tb_Users" ToRole="tb_Status" />
+          <NavigationProperty Name="tb_Branch" Relationship="LaunSysDBModel.FK_tb_Users_tb_Branch" FromRole="tb_Users" ToRole="tb_Branch" />
+          <NavigationProperty Name="tb_Department" Relationship="LaunSysDBModel.FK_tb_Users_tb_Department" FromRole="tb_Users" ToRole="tb_Department" />
+        </EntityType>
+        <Association Name="FK_tb_Branch_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Branch_tb_LGA">
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_LGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Branch_tb_State">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Branch_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Branch">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Expenses_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_Expenses" Type="Self.tb_Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_Expenses">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_FabricDescription_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_FabricDescription" Type="Self.tb_FabricDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_FabricDescription">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Income_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_Income" Type="Self.tb_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_Income">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_IncomingFabric_tb_Branch">
+          <End Role="tb_Branch" Type="Self.tb_Branch" Multiplicity="0..1" />
+          <End Role="tb_IncomingFabric" Type="Self.tb_IncomingFabric" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_IncomingFabric">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_City_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_City_tb_LGA">
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="0..1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_LGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_City_tb_State">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="0..1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_LGA_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_LGA">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_State_tb_Country">
+          <End Role="tb_Country" Type="Self.tb_Country" Multiplicity="0..1" />
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="tb_State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customers_tb_Gender">
+          <End Role="tb_Gender" Type="Self.tb_Gender" Multiplicity="0..1" />
+          <End Role="tb_Customers" Type="Self.tb_Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="tb_Customers">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customers_tb_Titles">
+          <End Role="tb_Titles" Type="Self.tb_Titles" Multiplicity="0..1" />
+          <End Role="tb_Customers" Type="Self.tb_Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Titles">
+              <PropertyRef Name="TitleID" />
+            </Principal>
+            <Dependent Role="tb_Customers">
+              <PropertyRef Name="TitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Division">
+          <End Role="tb_Division" Type="Self.tb_Division" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Division">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_LGA_tb_State">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="0..1" />
+          <End Role="tb_LGA" Type="Self.tb_LGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tb_LGA">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Role">
+          <End Role="tb_Role" Type="Self.tb_Role" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Status">
+          <End Role="tb_Status" Type="Self.tb_Status" Multiplicity="0..1" />
+          <End Role="tb_Users" Type="Self.tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LaunSysDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tb_Branch" EntityType="Self.tb_Branch" />
+          <EntitySet Name="tb_City" EntityType="Self.tb_City" />
+          <EntitySet Name="tb_Country" EntityType="Self.tb_Country" />
+          <EntitySet Name="tb_Customers" EntityType="Self.tb_Customers" />
+          <EntitySet Name="tb_Department" EntityType="Self.tb_Department" />
+          <EntitySet Name="tb_Division" EntityType="Self.tb_Division" />
+          <EntitySet Name="tb_Expenses" EntityType="Self.tb_Expenses" />
+          <EntitySet Name="tb_FabricDescription" EntityType="Self.tb_FabricDescription" />
+          <EntitySet Name="tb_Gender" EntityType="Self.tb_Gender" />
+          <EntitySet Name="tb_Income" EntityType="Self.tb_Income" />
+          <EntitySet Name="tb_IncomingFabric" EntityType="Self.tb_IncomingFabric" />
+          <EntitySet Name="tb_LGA" EntityType="Self.tb_LGA" />
+          <EntitySet Name="tb_Region" EntityType="Self.tb_Region" />
+          <EntitySet Name="tb_Role" EntityType="Self.tb_Role" />
+          <EntitySet Name="tb_State" EntityType="Self.tb_State" />
+          <EntitySet Name="tb_Status" EntityType="Self.tb_Status" />
+          <EntitySet Name="tb_Titles" EntityType="Self.tb_Titles" />
+          <EntitySet Name="tb_Users" EntityType="Self.tb_Users" />
+          <AssociationSet Name="FK_tb_Branch_tb_Country" Association="Self.FK_tb_Branch_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Branch_tb_LGA" Association="Self.FK_tb_Branch_tb_LGA">
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Branch_tb_State" Association="Self.FK_tb_Branch_tb_State">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Branch_tb_Status" Association="Self.FK_tb_Branch_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Expenses_tb_Branch" Association="Self.FK_tb_Expenses_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_Expenses" EntitySet="tb_Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_FabricDescription_tb_Branch" Association="Self.FK_tb_FabricDescription_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_FabricDescription" EntitySet="tb_FabricDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Income_tb_Branch" Association="Self.FK_tb_Income_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_Income" EntitySet="tb_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_IncomingFabric_tb_Branch" Association="Self.FK_tb_IncomingFabric_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_IncomingFabric" EntitySet="tb_IncomingFabric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_City_tb_Country" Association="Self.FK_tb_City_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_City_tb_LGA" Association="Self.FK_tb_City_tb_LGA">
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_City_tb_State" Association="Self.FK_tb_City_tb_State">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_LGA_tb_Country" Association="Self.FK_tb_LGA_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_State_tb_Country" Association="Self.FK_tb_State_tb_Country">
+            <End Role="tb_Country" EntitySet="tb_Country" />
+            <End Role="tb_State" EntitySet="tb_State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customers_tb_Gender" Association="Self.FK_tb_Customers_tb_Gender">
+            <End Role="tb_Gender" EntitySet="tb_Gender" />
+            <End Role="tb_Customers" EntitySet="tb_Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customers_tb_Titles" Association="Self.FK_tb_Customers_tb_Titles">
+            <End Role="tb_Titles" EntitySet="tb_Titles" />
+            <End Role="tb_Customers" EntitySet="tb_Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Division" Association="Self.FK_tb_Users_tb_Division">
+            <End Role="tb_Division" EntitySet="tb_Division" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_LGA_tb_State" Association="Self.FK_tb_LGA_tb_State">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Role" Association="Self.FK_tb_Users_tb_Role">
+            <End Role="tb_Role" EntitySet="tb_Role" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Status" Association="Self.FK_tb_Users_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Division_tb_Status" Association="LaunSysDBModel.FK_tb_Division_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Division" EntitySet="tb_Division" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customers_tb_Status" Association="LaunSysDBModel.FK_tb_Customers_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Customers" EntitySet="tb_Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Department_tb_Status" Association="LaunSysDBModel.FK_tb_Department_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Department" EntitySet="tb_Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_LGA_tb_Status1" Association="LaunSysDBModel.FK_tb_LGA_tb_Status1">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_LGA" EntitySet="tb_LGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Region_tb_Status" Association="LaunSysDBModel.FK_tb_Region_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Region" EntitySet="tb_Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Role_tb_Status" Association="LaunSysDBModel.FK_tb_Role_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Role" EntitySet="tb_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_State_tb_Status" Association="LaunSysDBModel.FK_tb_State_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_State" EntitySet="tb_State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Titles_tb_Status" Association="LaunSysDBModel.FK_tb_Titles_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Titles" EntitySet="tb_Titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Branch" Association="LaunSysDBModel.FK_tb_Users_tb_Branch">
+            <End Role="tb_Branch" EntitySet="tb_Branch" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Users_tb_Department" Association="LaunSysDBModel.FK_tb_Users_tb_Department">
+            <End Role="tb_Department" EntitySet="tb_Department" />
+            <End Role="tb_Users" EntitySet="tb_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Income_tb_Status" Association="LaunSysDBModel.FK_tb_Income_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Income" EntitySet="tb_Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Expenses_tb_Status" Association="LaunSysDBModel.FK_tb_Expenses_tb_Status">
+            <End Role="tb_Status" EntitySet="tb_Status" />
+            <End Role="tb_Expenses" EntitySet="tb_Expenses" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_tb_Division_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Division" Role="tb_Division" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Division">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customers_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Customers" Role="tb_Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Customers">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Department_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Department" Role="tb_Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Department">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_LGA_tb_Status1">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_LGA" Role="tb_LGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_LGA">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Region_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Region" Role="tb_Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Region">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Role_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Role" Role="tb_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Role">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_State_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_State" Role="tb_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_State">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Titles_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Titles" Role="tb_Titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Titles">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Branch">
+          <End Type="LaunSysDBModel.tb_Branch" Role="tb_Branch" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Users" Role="tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Branch">
+              <PropertyRef Name="BranchId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Users_tb_Department">
+          <End Type="LaunSysDBModel.tb_Department" Role="tb_Department" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Users" Role="tb_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Department">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="tb_Users">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Income_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Income" Role="tb_Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Income">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Expenses_tb_Status">
+          <End Type="LaunSysDBModel.tb_Status" Role="tb_Status" Multiplicity="0..1" />
+          <End Type="LaunSysDBModel.tb_Expenses" Role="tb_Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="tb_Expenses">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LaunSysDBModelStoreContainer" CdmEntityContainer="LaunSysDBEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LaunSysDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Branch">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Branch">
+              <MappingFragment StoreEntitySet="tb_Branch">
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Branchname" ColumnName="Branchname" />
+                <ScalarProperty Name="Branchcode" ColumnName="Branchcode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Coycode" ColumnName="Coycode" />
+                <ScalarProperty Name="Createdon" ColumnName="Createdon" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_City">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_City">
+              <MappingFragment StoreEntitySet="tb_City">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Cityname" ColumnName="Cityname" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Country">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Country">
+              <MappingFragment StoreEntitySet="tb_Country">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Countryname" ColumnName="Countryname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Customers">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Customers">
+              <MappingFragment StoreEntitySet="tb_Customers">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="OtherNames" ColumnName="OtherNames" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Cust_Address" ColumnName="Cust_Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsNotActive" ColumnName="IsNotActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Department">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Department">
+              <MappingFragment StoreEntitySet="tb_Department">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="Deptname" ColumnName="Deptname" />
+                <ScalarProperty Name="Appraisalcenter" ColumnName="Appraisalcenter" />
+                <ScalarProperty Name="CoyCode" ColumnName="CoyCode" />
+                <ScalarProperty Name="Deptcode" ColumnName="Deptcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Division">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Division">
+              <MappingFragment StoreEntitySet="tb_Division">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="Divisionname" ColumnName="Divisionname" />
+                <ScalarProperty Name="MIScode" ColumnName="MIScode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Expenses">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Expenses">
+              <MappingFragment StoreEntitySet="tb_Expenses">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Exp_SN" ColumnName="Exp_SN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Inv_No" ColumnName="Inv_No" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_FabricDescription">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_FabricDescription">
+              <MappingFragment StoreEntitySet="tb_FabricDescription">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Cust_Name" ColumnName="Cust_Name" />
+                <ScalarProperty Name="Tot_Fabric" ColumnName="Tot_Fabric" />
+                <ScalarProperty Name="Inv_No" ColumnName="Inv_No" />
+                <ScalarProperty Name="Fab_SN" ColumnName="Fab_SN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Gender">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Gender">
+              <MappingFragment StoreEntitySet="tb_Gender">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Gendername" ColumnName="Gendername" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Income">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Income">
+              <MappingFragment StoreEntitySet="tb_Income">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Inc_SN" ColumnName="Inc_SN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Inv_No" ColumnName="Inv_No" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_IncomingFabric">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_IncomingFabric">
+              <MappingFragment StoreEntitySet="tb_IncomingFabric">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DateSN" ColumnName="DateSN" />
+                <ScalarProperty Name="Cust_Name" ColumnName="Cust_Name" />
+                <ScalarProperty Name="Inv_No" ColumnName="Inv_No" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_LGA">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_LGA">
+              <MappingFragment StoreEntitySet="tb_LGA">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="LGAname" ColumnName="LGAname" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Region">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Region">
+              <MappingFragment StoreEntitySet="tb_Region">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="Regionname" ColumnName="Regionname" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Role">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Role">
+              <MappingFragment StoreEntitySet="tb_Role">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Rolename" ColumnName="Rolename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_State">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_State">
+              <MappingFragment StoreEntitySet="tb_State">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Statename" ColumnName="Statename" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Status">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Status">
+              <MappingFragment StoreEntitySet="tb_Status">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Titles">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Titles">
+              <MappingFragment StoreEntitySet="tb_Titles">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Users">
+            <EntityTypeMapping TypeName="LaunSysDBModel.tb_Users">
+              <MappingFragment StoreEntitySet="tb_Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

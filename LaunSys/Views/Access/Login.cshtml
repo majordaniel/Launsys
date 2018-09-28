@@ -1,0 +1,108 @@
+﻿@using Vereyon.Web
+
+@model LaunSys.Models.UsersViewModel
+
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>KennyDan</b>LaunSys</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to Access LaunSys</p>
+
+
+
+
+        @*<form id="UserInfoForm" role="form" method="post" >*@
+            @using (Html.BeginForm("LoginUser", "Access", FormMethod.Post, new { id = "UserInfoForm" }))
+            {
+
+                <a id="errormsg">@Html.RenderFlashMessages()</a>
+            <div class="form-group">
+             
+                @Html.TextBoxFor(Model => Model.Email, new { @id = "Email", @class = "form-control", @placeholder = "Enter User Email" })
+                @*@Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "error" })*@
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group">
+               
+                @Html.TextBoxFor(Model => Model.Password, new { @id = "Password", @class = "form-control", @placeholder = "Enter User Password" })
+                @*@Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "error" })*@
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                 
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    @*<a href="#" onclick="LoginUser()"  class="btn btn-primary">Login</a>*@
+                </div>
+                <!-- /.col -->
+            </div>
+            }
+        @*</form>*@
+
+
+   
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+
+
+
+
+
+@*<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+@*<script>
+    var id;
+    @if (TempData["fail"] != null)
+    {
+
+    }
+
+    var LoginUser= function () {
+        var data = $("#UserInfoForm").serialize();
+
+        //if (!$("#UserInfoForm").valid()) {
+        //    return false;
+        //}
+
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("LoginUser","Access")",
+
+            data: data,
+            success: function (response) {
+
+                if (response=="fail") {
+                    window.location.href = "/Access/Login";
+                    alert("Invalid Username or Password");
+                }
+                else if (response=="Admin") {
+                    window.location.href = "/Home/Index";
+                    alert("Welcome Admin");
+                }
+                else if (response == "Manager") {
+                    window.location.href = "/Home/Index";
+                    alert("Welcome Manager");
+                }
+
+
+            }
+        })
+    }
+
+</script>*@

@@ -1,0 +1,228 @@
+﻿@model LaunSys.Models.UsersViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>USERS INFORMATION PANEL</h2>
+<style>
+    .modal-dialog {
+        width: 300px;
+        height: 700px /*!important*/;
+    }
+
+    .modal-content {
+        /* 80% of window height */
+        height: 100%;
+        background-color: #BBD6EC;
+    }
+
+    .modal-header {
+        background-color: #337AB7;
+        padding: 16px 16px;
+        color: #FFF;
+        border-bottom: 2px dashed #337AB7;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+<div class="row">
+    <div classs="form-group col-lg-12" style="margin-left:20px;margin-right:20px">
+        @*------------------button for add new data -------------------------------------*@
+        <a href="#" class="btn btn-primary btn-block btn-lg" onclick="AddEditUser(0)" style="margin-bottom:20px">New User</a>
+
+        @*------------------ --------------------------------------------------------*@
+        <table class="table table-responsive table-striped display" id="UserTable" style="margin-top:20px">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    @*<th>Password</th>*@
+                    <th>Role</th>
+                    <th>Is Active</th>
+
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.ListOfUsers != null)
+                {
+                    foreach (var item in ViewBag.ListOfUsers)
+                    {
+                        <tr id="row_@item.UserId">
+                            <td>@item.Email</td>
+                            @*<td>@item.Password</td>*@
+                            <td>@item.Rolename</td>
+                            <td>@item.Status</td>
+
+                            <td><a class="btn btn-xs btn-danger" href="#" onclick="ConfirmDelete(@item.UserId)"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            <td><a class="btn btn-xs btn-success" href="#" onclick="ShowUser(@item.UserId)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                            <td><a class="btn btn-xs btn-success" href="#" onclick="AddEditUser(@item.UserId)"><i class="glyphicon glyphicon-pencil"></i></a></td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <input type="hidden" name="UserId" value="" id="HiddenUserID" />
+
+
+        @*------------------modal for Delete confirmation -------------------------*@
+
+        <div class="modal fade" id="DeleteModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete User?</h3>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are You sure you want to Delete the User?</h4>
+
+                        <div style="text-align:center; display:none" id="loaderDiv">
+                            <img src="~/Content/loading.gif" width="100" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn  btn-default" data-dismiss="modal">Cancel</a>
+                        <a href="#" class="btn  btn-success" onclick="DeleteUser()">Proceed</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*------------------modal to view individual Client -------------------------*@
+
+        <div class="modal fade" id="ViewSingleUserModal">
+            <div class="modal-dialog" style="width: 300px; height: 520px !important;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">View User Details</h2>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body" id="SingularInfoDiv">
+
+                        @Html.Partial("SingleUserView");
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn  btn-default" data-dismiss="modal">close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*------------------------------------------Add/EDIT modal-------------------------------------------------*@
+        <div class="modal fade" id="AddEditUserModalDiv">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Add Edit Client Details</h3>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body" id="AddEditModalBody">
+
+                        @*---------THE ADD EDIT FORM LOADS HERE*@
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn  btn-default" data-dismiss="modal">close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*---------------------------------------------------------------------------------------*@
+
+
+    </div>
+    @*<div class="col-lg-6">
+
+        </div>*@
+</div>
+
+<script>
+
+  $(function () {
+      $('#UserTable').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+<script>
+
+
+    //--------------------------confirm deletion of the record-----------------------
+    var ConfirmDelete = function (UserId) {
+        $("#HiddenCustID").val(UserId);
+        $("#DeleteModal").modal('show');
+    }
+
+
+
+    //--------------------------perform the deletion-----------------------
+    var DeleteUser = function () {
+
+        $("#loaderDiv").show();
+        var UserId = $("#HiddenUserID").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Users/DeleteUser",
+            data: { UserId: UserId },
+            success: function (result) {
+
+                $("#loaderDiv").hide();
+                alert("User Deleted");
+                $("#DeleteModal").modal("hide");
+                $("#row_" + UserId).remove();
+            }
+        })
+    }
+
+    //--------------------------show the individual client-----------------------
+    var ShowUser = function (UserId) {
+
+        //====================THIS======================
+        //var url = "/Clients/ViewClient?CustID=" + CustID;
+        //$("#SingularInfoDiv").load(url, function () {
+        //    $("#ViewSingleUserModal").modal("show");
+        //})
+
+        //====================OR======================
+
+        $.ajax({
+            type: "POST",
+            url: "/Users/ViewUser",
+            data: { UserId: UserId },
+            success: function (response) {
+
+                $("#SingularInfoDiv").html(response);
+                $("#ViewSingleUserModal").modal("show");
+
+            }
+        })
+        //===================================================
+    }
+    //--------------------to pass the ID parameter for function----------------------------
+    var AddEditUser = function (UserId) {
+        var url = "/Users/AddEdit?UserId=" + UserId;
+        $("#AddEditModalBody").load(url, function () {
+            $("#AddEditUserModalDiv").modal("show");
+        })
+
+    }
+</script>
+
+
+
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="922a4d691d7845e3a42cf6ac518870ba" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="LaunSysDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Branch" Width="1.5" PointX="13.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_City" Width="1.5" PointX="16.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Country" Width="1.5" PointX="9.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Customers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Department" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Division" Width="1.5" PointX="11.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Expenses" Width="1.5" PointX="16" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_FabricDescription" Width="1.5" PointX="16" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Gender" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Income" Width="1.5" PointX="11" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_IncomingFabric" Width="1.5" PointX="15.5" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_LGA" Width="1.5" PointX="16.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Region" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Role" Width="1.5" PointX="11.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_State" Width="1.5" PointX="11.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Status" Width="1.5" PointX="6.875" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Titles" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LaunSysDBModel.tb_Users" Width="1.5" PointX="13.75" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Branch_tb_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Branch_tb_LGA" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Branch_tb_State" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Branch_tb_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Expenses_tb_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_FabricDescription_tb_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Income_tb_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_IncomingFabric_tb_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_City_tb_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_City_tb_LGA" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_City_tb_State" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_LGA_tb_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_State_tb_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Customers_tb_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Customers_tb_Titles" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Users_tb_Division" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_LGA_tb_State" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Users_tb_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Users_tb_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Division_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Customers_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Department_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_LGA_tb_Status1" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Region_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Role_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_State_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Titles_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Users_tb_Branch" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Users_tb_Department" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Income_tb_Status" />
+        <AssociationConnector Association="LaunSysDBModel.FK_tb_Expenses_tb_Status" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

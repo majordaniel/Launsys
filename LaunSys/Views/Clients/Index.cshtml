@@ -1,0 +1,245 @@
+﻿@using Vereyon.Web
+
+@model LaunSys.Models.ClientsViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<h2>CLIENTS INFORMATION PANEL</h2>
+
+<style>
+    .modal-dialog {
+        width: 300px;
+        height: 700px /*!important*/;
+    }
+
+    .modal-content {
+        /* 80% of window height */
+        height: 100%;
+        background-color: #BBD6EC;
+    }
+
+    .modal-header {
+        background-color: #337AB7;
+        padding: 16px 16px;
+        color: #FFF;
+        border-bottom: 2px dashed #337AB7;
+    }
+
+    .error{
+        color:red;
+    }
+</style>
+<div class="row">
+    <div classs="form-group col-lg-12" style="margin-left:20px;margin-right:20px">
+
+
+        <a id="errormsg">@Html.RenderFlashMessages()</a>
+        @*@using (Html.BeginForm("Index", "Clients", FormMethod.Post))
+        {*@
+
+        @*------------------button for add new data -------------------------------------*@
+            
+        <a href="#" class="btn btn-primary btn-block btn-lg" onclick="AddEditClient(0)" style="margin-bottom:20px">New Client</a>
+        @*------------------ --------------------------------------------------------*@
+        <table class="table table-responsive table-striped display" id="ClientsTable" style="margin-top:20px">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>SurName</th>
+                    <th>Other Names</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Walk in Date</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.ListOfClients != null)
+                {
+                    foreach (var item in ViewBag.ListOfClients)
+                    {
+                        <tr id="row_@item.CustID">
+                            <td>@item.Title</td>
+                            <td>@item.SurName</td>
+                            <td>@item.OtherNames</td>
+                            <td>@item.Gendername</td>
+                            <td>@item.Cust_Address</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreatedDate</td>
+                            <td><a class="btn btn-xs btn-danger" href="#" onclick="ConfirmDelete(@item.CustID)"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            <td><a class="btn btn-xs btn-success" href="#" onclick="ShowClient(@item.CustID)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                            <td><a class="btn btn-xs btn-success" href="#" onclick="AddEditClient(@item.CustID)"><i class="glyphicon glyphicon-pencil"></i></a></td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        
+        <input type="hidden" name="CustID" value="" id="HiddenCustID"/>
+
+
+        @*------------------modal for Delete confirmation -------------------------*@
+
+        <div class="modal fade" id="DeleteModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Delete Client?</h3>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are You sure you want to Delete the Employee?</h4>
+
+                        <div style="text-align:center; display:none" id="loaderDiv">
+                            <img src="~/Content/loading.gif" width="100" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn  btn-default" data-dismiss="modal">Cancel</a>
+                        <a href="#" class="btn  btn-success" onclick="DeleteClient()">Proceed</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*------------------modal to view individual Client -------------------------*@
+
+        <div class="modal fade" id="ViewSingleClientModal">
+            <div class="modal-dialog" style="width: 300px; height: 520px !important;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">View Client Details</h2>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body" id="SingularInfoDiv">
+                       
+                        @Html.Partial("SingleClientView"); 
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn  btn-default" data-dismiss="modal">close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*------------------------------------------Add/EDIT modal-------------------------------------------------*@
+        <div class="modal fade" id="AddEditClientModalDiv">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Add Edit Client Details</h3>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body" id="AddEditModalBody">
+
+                   @*---------THE ADD EDIT FORM LOADS HERE*@
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn  btn-default" data-dismiss="modal">close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+      @*---------------------------------------------------------------------------------------*@
+
+
+    </div>
+    @*<div class="col-lg-6">
+
+    </div>*@
+</div>
+
+<script>
+
+  $(function () {
+      $('#ClientsTable').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+<script>
+
+
+    //--------------------------confirm deletion of the record-----------------------
+    var ConfirmDelete = function (CustID) {
+        $("#HiddenCustID").val(CustID);
+        $("#DeleteModal").modal('show');
+    }
+
+
+
+    //--------------------------perform the deletion-----------------------
+    var DeleteClient = function () {
+
+        $("#loaderDiv").show();
+        var CustID = $("#HiddenCustID").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Clients/DeleteClient",
+            data: {CustID:CustID},
+            success: function (result) {
+
+                $("#loaderDiv").hide();
+                alert("Customer Deleted");
+                $("#DeleteModal").modal("hide");
+                $("#row_" + CustID).remove();
+            }
+        })
+    }
+
+    //--------------------------show the individual client-----------------------
+    var ShowClient = function (CustID) {
+
+        //====================THIS======================
+        //var url = "/Clients/ViewClient?CustID=" + CustID;
+        //$("#SingularInfoDiv").load(url, function () {
+        //    $("#ViewSingleClientModal").modal("show");
+        //})
+
+        //====================OR======================
+
+        $.ajax({
+            type: "POST",
+            url: "/Clients/ViewClient",
+            data: {CustID:CustID},
+            success: function (response) {
+
+                $("#SingularInfoDiv").html(response);
+                $("#ViewSingleClientModal").modal("show");
+
+            }
+        })
+        //===================================================
+    }
+    //--------------------to pass the ID parameter for function----------------------------
+    var AddEditClient = function (CustID) {
+        var url = "/Clients/AddEdit?CustID=" + CustID;
+        $("#AddEditModalBody").load(url, function () {
+            $("#AddEditClientModalDiv").modal("show");
+        })
+
+    }
+</script>
+

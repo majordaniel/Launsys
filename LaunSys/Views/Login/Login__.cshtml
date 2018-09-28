@@ -1,0 +1,160 @@
+﻿@*@{
+        ViewBag.Title = "Login";
+    }
+
+    <h2>Login</h2>*@
+
+<!-- /.modal -->
+
+
+    <div class="modal modal-primary fade" id="loginmodal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="form-horizontal">
+
+                    <span><img src="~/images/sketch.jpg" class="myicon" /></span>
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                        <h4 class="modal-title">Welcome to LaunSys</h4><br />
+                        <div id="messenger">
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-body">
+                        @*<p>One fine body&hellip;</p>*@
+
+                        <div class="form-group">
+                            <label for="txtemail" class="col-sm-2 col-lg-3 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="email" id="txtemail" placeholder="Enter Your Email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpassword" class="col-sm-2 col-lg-3 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="password" id="txtpassword" placeholder="Enter Your Password" />
+                           </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline">Save changes</button>*@
+
+                        <a href="#" class="btn btn-primary pull-left rbtnmargin" id="btnlogin">Click to Login<span class="glyphicon glyphicon-user"></span> </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+@*<style>
+
+        .modal-dialog {
+            max-width: 480px;
+        }
+
+        .modal-dialog {
+            transform:translate(0,50%) !important;
+            -ms-transform:translate(0,50%) !important;
+            -webkit-transform:translate(0,50%) !important;
+        }
+
+
+        .rbtnmargin {
+            margin-left: 90px;
+        }
+    </style>*@
+
+<style>
+   /*.loginmodal-modal .modal {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        left: auto;
+        display: block;
+        z-index: 1;
+    }
+
+    .loginmodal-modal .modal {
+        background: transparent !important;
+    }*/
+   .modal  {
+       display:block;
+margin-left:auto;
+margin-right:auto;
+   }
+
+  .failed{
+      text-align:left;
+      font-weight:bold;
+      font-family:"Times New Roman";
+      color:white;
+      background-color:red;
+  }
+  .myicon{
+display:block;
+margin-left:auto;
+margin-right:auto;
+  }
+</style>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#loginmodal").modal({
+            backdrop:'static',
+    });
+    });
+    $("#btnlogin").click(function () {
+        var dataObjects = {
+            Email: $("#txtemail").val(),
+            Password: $("#txtpassword").val(),
+
+        };
+        $.ajax({
+            url: '@Url.Action("Login","Login")',
+            type: "POST",
+            data: dataObjects,
+            datatype: "json",
+            success: function (result)
+            {
+                if (result.toString() == "Success")
+
+                {
+                    //alert(result);
+                    $("#loginmodal").modal("hide");
+                    var url = "/Home/Index";
+                    window.location.href = url;
+                    
+                }
+                else {
+                    //alert(result);
+                    $("#txtemail").val("");
+                    $("#password").val("");
+                    $("#txtemail").focus();
+
+                    $("#messenger").html('<div class ="failed">' + result + '</div>');
+                }
+            },
+            error: function (result) {
+                //alert("Error");
+                $("#txtemail").val("");
+                $("#password").val("");
+                $("#txtemail").focus();
+                $("#messenger").html('<div class ="failed"> Error! Please Try Again </div>');
+            }
+        });
+    })
+</script>
+<!-- /.modal -->

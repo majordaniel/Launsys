@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Single Income View";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <img src="~/Content/logo.jpg" width="100" ; height="70" style="align-content:center" />
+</div>
+
+<div>
+    <h4>Individual Income Details</h4><br>
+    <table class="table table-striped">
+
+        @if (ViewBag.SingleIncomeDetail != null)
+        {
+            foreach (var item in ViewBag.SingleIncomeDetail)
+            {
+
+                <tr>
+                    <td><b>Date: </b></td>
+                    <td>@item.Date</td>
+                </tr>
+                <tr>
+                    <td><b>Description: </b></td>
+                    <td>@item.Description</td>
+                </tr>
+                <tr>
+                    <td><b>Amount </b></td>
+                    <td>@item.Amount</td>
+                </tr>
+                <tr>
+                    <td><b>Branch: </b></td>
+                    <td>@item.Branchname</td>
+                </tr>
+
+
+            }
+        }
+
+    </table>
+</div>
+

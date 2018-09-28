@@ -1,0 +1,123 @@
+﻿
+@*@{
+    ViewBag.Title = "AddEditViewPartialView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+@model LaunSys.Models.ClientsViewModel
+
+<h2>Add Edit Partial View</h2>
+
+<form id="clientInfoForm">
+
+    @Html.HiddenFor(Model => Model.CustID)
+      
+    @Html.DropDownListFor(Model => Model.TitleID, ViewBag.VTitleLists as SelectList, "---Select Title---", new {@id="titleid", @class = "form-control" })
+    @Html.ValidationMessageFor(Model => Model.TitleID, "", new { @class = "error" })
+
+
+    @Html.TextBoxFor(Model => Model.SurName, new { @id = "surname", @class = "form-control", @placeholder = "Enter Client's Surname" })
+    @Html.ValidationMessageFor(Model => Model.SurName, "", new { @class = "error" })
+
+    @Html.TextBoxFor(Model => Model.OtherNames, new { @id = "othernames", @class = "form-control", @placeholder = "Enter The Client's surname" })
+    @Html.DropDownListFor(Model => Model.GenderID, ViewBag.VGenderLists as SelectList, "---Select Gender---", new { @class = "form-control" })
+
+    @Html.TextAreaFor(Model => Model.Cust_Address, new { @id = "address", @class = "form-control", @placeholder = "Enter the Client's Address" })
+    @Html.ValidationMessageFor(Model => Model.Cust_Address, "", new { @class = "error" })
+
+    @Html.TextBoxFor(Model => Model.Phone, new { @id = "phone", @class = "form-control", @placeholder = "Enter Phone No" })
+    @Html.TextBoxFor(Model => Model.Email, new { @id = "email", @class = "form-control", @placeholder = "Enter Email" })
+    @Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control datepicker", @id = "walkindate", @placeholder = "yyyy/mm/dd" })
+
+    @*@Html.EditorFor(Model => Model.CreatedDate, new { htmlAttributes= new { @Value = Model.CreatedDate.ToString("MM/dd/yyyy"), @class = "form-control" } })*@
+
+    <a href="#" id="btnsubmit" @*onclick="return AddEdit()"*@ class="btn btn-success btn-block">@if(Model.CustID>0){<span>Update</span>}else{<span>Save</span>}</a>
+   
+    
+
+</form>
+<div style="text-align:center; display:none" id="loaderDiv">
+    <img src="~/Content/loading.gif" width="100" />
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    //function validate()
+    //{
+    //    var isValid = true;
+    //    if ($('#titleid').val.trim() == "")
+    //    {
+    //        $('#titleid').css('border-color', 'Red');
+    //        isValid = false;
+    //    }
+    //    else
+    //    {
+    //        $('#titleid').css('border-color', 'lightgrey');
+    //    }
+    //    if ($('#surname').val.trim() == "") {
+    //        $('#surname').css('border-color', 'Red');
+    //        isValid = false;
+    //    }
+    //    else {
+    //        $('#surname').css('border-color', 'lightgrey');
+    //    }
+    //    return isValid;
+    //}
+    //function AddEdit()
+    //{
+    //    var res = validate();
+    //    if (res == false)
+    //    {
+    //        return false;
+    //    }
+
+    //    $("#loaderDiv").show();
+    //    var data = $("#clientInfoForm").serialize();
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Clients/Index",
+
+    //        data: data,
+    //        success: function (response) {
+
+    //            $("#loaderDiv").hide();
+    //            alert("CLIENT Modified/Inserted");
+    //            $("#ClientModal").modal("hide");
+    //            window.location.href = "/Clients/Index";
+    //        }
+    //    })
+
+
+    //$(document).ready(function () {
+
+        //--------------for saving-------------
+
+    $("#btnsubmit").click(function () {
+
+
+            $("#loaderDiv").show();
+            var data = $("#clientInfoForm").serialize();
+            if (!$("#clientInfoForm").valid()) {
+                return false;
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Clients/Index",
+              
+                data: data,
+                success: function (response) {
+                   
+                    $("#loaderDiv").hide();
+                    alert("CLIENT Modified/Inserted");
+                    //$("#ClientModal").modal("hide");
+                    window.location.href = "/Clients/Index";
+                }
+            })
+        })
+    //})
+</script>

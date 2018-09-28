@@ -1,0 +1,370 @@
+﻿@model LaunSys.Models.CustomersViewModel
+@*@model IEnumerable<LaunSys.Models.tb_Customers>*@
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script src="~/Scripts/Site.js"></script>
+<!-- SlimScroll -->
+<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+
+<link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+
+  <!-- DataTables -->
+<link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+
+<h2>Customers Manager</h2>
+<div class="container" style="margin-top:1%; margin-right:3% ">
+    <a href="#" class="btn btn-info" onclick="AddNewCustomer(0)">Add New Customer</a><br /><br />
+
+
+   
+    @*<div class=" row form-group">
+        <span>
+            <b>Search By:</b><select id="SearchBy" class="form-control">
+              <option value="CustID">CustID</option>
+            <option value="SurName">SurName</option>
+             <option value="Phone">Phone</option>
+            </select>
+
+
+            @Html.TextBox("Search", "", new { @id = "Search", @class = "form-control" })
+
+            <input type="submit" id="SearchBtn" value="Search" class="form-control" />
+
+            @*===========================================================================
+            ------------for date picker------------
+            <input type="date" id="txtdob" value="Search" class="form-control" />
+            ------------for normal text box with placeholder------------
+            <input type="text" class="form-control" id="txtsearch" placeholder="Enter Text to Search">
+            ===========================================================================*
+
+        </span>
+    </div>*@
+
+        <div class="row">
+            <div class="box table-responsive">
+                <div class="box-header">
+                    <h3 class="box-title">All Active Customers</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    @*--------------Table to Display all the database data-------------------*@
+
+                    <table class="table table-bordered table-striped table-responsive" id="customer_table" style="margin-top:1%; margin-right:3%">
+                        <thead>
+                            <tr>
+                                <th>Cust.ID</th>
+                                <th> Title</th>
+                                <th> SurName</th>
+                                <th> OtherNames</th>
+                                <th> Gender</th>
+                                <th> Address</th>
+                                <th> Phone</th>
+                                <th> Email</th>
+                                <th> Walkin Date</th>
+                                @*<th> Status</th>*@
+                                <th> (Edit)</th>
+                                <th> (Delete)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="SetCustomersList">
+                            <tr id="LoadingStatus" style="color:red;font-size:large"></tr>
+                        </tbody>
+                    </table>
+                    @*Pop Up Box for the Add and Edit*@
+
+                    <div class="modal fade" id="CustomersModal" style="width:auto">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                @*<div class="modal-header">
+                                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                                    <h4 id="ModalTitle"></h4>
+                                </div>*@
+
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Customers</h3>
+                                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="form">
+                                        <fieldset id="SubmitForm">
+
+                                            @Html.HiddenFor(m => m.CustID, new { @id = "CustID" })
+
+                                            <div class="form-group">
+                                                @Html.DropDownListFor(m => m.TitleID, ViewBag.ListOfTitles as SelectList, "--Select Title--", new { @id = "DropDwnTitle", @class = "form-control" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.SurName, new { @id = "SurName", @class = "form-control", @placeholder = "SurName*" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.OtherNames, new { @id = "OtherNames", @class = "form-control", @placeholder = "Other Names*" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.DropDownListFor(m => m.GenderID, ViewBag.ListOfGenders as SelectList, "--Select Gender--", new { @id = "DropDwnGender", @class = "form-control" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Cust_Address, new { @id = "Cust_Address", @class = "form-control", @placeholder = "Address*" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Phone, new { @id = "Phone", @class = "form-control", @placeholder = "Phone Number*" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.Email, new { @id = "Email", @class = "form-control", @placeholder = "Email*" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(m => m.CreatedDate, new { @id = "CreatedDate", @class = "form-control datepicker", @placeholder = "Created Date-yyyy-mm-dd*" })
+
+                                                @*@Html.LabelFor(Model=> Model.CreatedDate, htmlAttributes: new {@class="control-label col-md-2"})
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(Model => Model.CreatedDate, new { htmlAttributes= new { @class="form-control", @id="datepicker" } })
+
+                                                    </div>*@
+
+                                            </div>
+
+                                            @*<div class="form-group">
+                                                    @Html.DropDownListFor(m => m.IsActive, ViewBag.ListOfStatus as SelectList, "--Select Status--", new { @id = "DropDwnStatus", @class = "form-control" })
+                                                </div>*@
+                                            @*<div class="form-group">
+                                                    @Html.TextBoxFor(m => m.IsActive, new { @id = "IsActive", @class = "form-control", @placeholder = "IsActive- True or False*" })
+                                                </div>*@
+                                            <div class="form-group">
+                                                <a href="#" class="btn btn-la btn-danger" id="btnSaveCustomer">Save</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @*Pop Up Box for Delete confirmation*@
+                    <div class="modal fade" id="DeleteConfirmationModal">
+                        <div class="modal-dialog">
+                            @*---moddal content-------*@
+                            <div class="modal-content">
+                                @*---moddal header-------*@
+                                <div class="modal-header">
+                                    <a href="#" class="close" data-dissmiss="modal">&times;</a>
+                                    <h4>Delete Customer Record</h4>
+                                </div>
+                                @*---moddal body-------*@
+                                <div class="modal-body">
+                                    <h4>Are You Ready to Delete the Customer?</h4>
+                                </div>
+                                @*---moddal footer-------*@
+
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-primary" data-dissmiss="modal">Cancel</a>
+                                    <a href="#" class="btn btn-danger" onclick="ConfirmDelete()">Confirm</a>
+                                </div>
+                                @*----------------------*@
+                            </div>
+                            @*--end of moddal content-------*@
+                        </div>
+                    </div>
+                    @*----------------------------------------------*@
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+
+        </div>
+
+</div>
+
+@*<script src="~/Scripts/jquery-3.3.1.js"></script>*@
+ @*DataTables*@ 
+<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+
+        <script>
+
+
+            $(document).ready(function () {
+
+                $("#customer_table").DataTable({
+                    "paging"      : true,
+                    "lengthChange": true,
+                    "searching"   : true,
+                    "ordering"    : true,
+                    "info"        : true,
+                    "autoWidth"   : true,
+                    "language": {
+                        "emptyTable":"No Data Found, Please Click on the <b>Add New</b> Button"
+                    }
+                    });
+
+
+                $("#SearchBtn").click(function () {
+                    var SearchBy =$("#SearchBy").val();
+                    var SearchValue =$("#Search").val();
+                    var SetData =$("#customer_table");
+                    SetData.html("");
+                    $.ajax({
+                        type:"post", 
+                        url: "/Customers/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                        contentType:"html",
+                        success:function(result){
+                            if (result.lenth==0) {
+                                SetData.append('<tr style="color:red"><td colspan="11">No Match Found</td></tr>')
+                            }
+                            else {
+                                $.each(result,function (index, value) {
+                                    var Data="<tr>"+ 
+                                        "<td>" + value.Cust.ID+"</td>"+
+                                         "<td>" + value.Title+"</td>"+
+                                         "<td>" + value.SurName+"</td>"+
+                                           "<td>" + value.OtherNames+"</td>"+
+                                            "<td>" + value.Gendername+"</td>"+
+                                             "<td>" + value.Cust_Address+"</td>"+
+                                             "<td>" + value.Phone+"</td>"+
+                                              "<td>" + value.Email+"</td>"+
+                                              "<td>" + value.CreatedDate+"</td>"+
+                                "<td>" + "<a href='#' class='btn btn-warning' onclick='EditCustomerRecord(" + CustList[i].CustID + ")'><span class='glyphicon glyphicon-edit'></span></a>" + "</td>" +
+                                 "<td>" + "<a href='#' class='btn btn-danger' onclick='DeleteCustomerRecord(" + CustList[i].CustID + ")'><span class='glyphicon glyphicon-trash'></span></a>" + "</td>"
+                                    +"</tr>";
+                                    SetData.append(Data);
+                                });
+                            }
+                        }
+                    });
+                    
+                });
+            });
+
+
+
+            //To populate the table with customers details
+            $("#LoadingStatus").html("Loading..."); 
+            $.get("/Customers/GetCustomersList", null, DataBind);
+            function DataBind(CustList) {
+                var SetData = $("#SetCustomersList");
+
+                for (var i = 0; i < CustList.length; i++) {
+                    var Data = "<tr class='row_" + CustList[i].CustID + "'>" +
+
+                          "<td>" + CustList[i].CustID + "</td>" +
+                        "<td>" + CustList[i].Title + "</td>" +
+                          "<td>" + CustList[i].SurName + "</td>" +
+                            "<td>" + CustList[i].OtherNames + "</td>" +
+                              "<td>" + CustList[i].Gendername + "</td>" +
+                              "<td>" + CustList[i].Cust_Address + "</td>" +
+                              "<td>" + CustList[i].Phone + "</td>" +
+                                    "<td>" + CustList[i].Email + "</td>" +
+                                 "<td>" + CustList[i].CreatedDate + "</td>"+
+                                  //"<td>" + CustList[i].IsActive + "</td>" +
+
+                        "<td>" + "<a href='#' class='btn btn-warning' onclick='EditCustomerRecord(" + CustList[i].CustID + ")'><span class='glyphicon glyphicon-edit'></span></a>" + "</td>" +
+                        "<td>" + "<a href='#' class='btn btn-danger' onclick='DeleteCustomerRecord(" + CustList[i].CustID + ")'><span class='glyphicon glyphicon-trash'></span></a>" + "</td>"
+                    "</tr>";
+                    SetData.append(Data);
+                    $("#LoadingStatus").html(" ");
+                }
+            }
+
+
+            //show the pop up for add new customer
+            function AddNewCustomer(CustID) {
+                $("#form")[0].reset();
+                $("#CustID").val(0);
+
+                $("#DropDwnTitle option:selected").text("--Select Title--");
+                $("#DropDwnGender option:selected").text("--Select Gender--");
+
+                //$("#DropDwnStatus option:selected").text("--Select Status--"); 
+
+                $("#ModalTitle").html("Add New Customer");
+                $("#CustomersModal").modal();
+            }
+
+
+
+            //show the pop up for Edit  customer records
+            function EditCustomerRecord(CustID) {
+                var url = "/Customers/GetCustomerID?CustID=" + CustID;
+                $("#ModalTitle").html("Update Customer Record");
+                $("#CustomersModal").modal();
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+
+                        $("#CustID").val(obj.CustID);
+                        $("#DropDwnTitle option:selected").text(obj.tb_Titles.Title);
+                        $("#SurName").val(obj.SurName);
+                        $("#OtherNames").val(obj.OtherNames);
+                        $("#Cust_Address").val(obj.Cust_Address);
+                        $("#DropDwnGender option:selected").text(obj.tb_Gender.Gendername);
+                        $("#Phone").val(obj.Phone);
+                        $("#Email").val(obj.Email);
+                        $("#CreatedDate").val(obj.CreatedDate);
+                        $("#DropDwnTitle option:selected").val(obj.TitleID);
+                        $("#DropDwnGender option:selected").val(obj.GenderID);
+
+                    }
+                })
+            }
+
+
+            //save  customer records
+            $("#btnSaveCustomer").click(function () {
+                var data = $("#SubmitForm").serialize();
+                $.ajax({
+                    type: "Post",
+                    url: "/Customers/InsertCustomers",
+                    data: data,
+                    success: function (result) {
+                        alert("Success!...");
+                        window.location.href = "/Customers/Index";
+                        $("#CustomersModal").modal("hide");
+                    }
+                })
+            })
+
+
+
+            //show the pop up to delete customer
+            function DeleteCustomerRecord(CustID) {
+                $("#CustID").val(CustID);
+                $("#DeleteConfirmationModal").modal("show");
+            }
+            function ConfirmDelete() {
+                var CustID = $("#CustID").val();
+                $.ajax({
+                    type: "POST", 
+                    url: "/Customers/DeleteCustomerRecord?CustID=" + CustID,
+                    success: function (result) {
+                        $("#DeleteConfirmationModal").modal("hide");
+                        $(".row_" + CustID).remove();
+                        $(".row_" + CustID).hide();
+                    }
+                })
+            }
+</script>
+
+
