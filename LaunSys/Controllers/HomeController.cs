@@ -38,7 +38,7 @@ namespace LaunSys.Controllers
                                        name = y.Key,
                                        TotFab = y.Count()
                                    };
-            
+
 
             //Highest paid Customer
             var amt = (from x in db.tb_IncomingFabric select x.Amount).Max();
@@ -47,19 +47,55 @@ namespace LaunSys.Controllers
                               where x.Amount == amt
                               select x.Cust_Name;
 
-            ViewBag.HighestPaidCust = HighestCust;
+            ViewBag.HighestPaidCust = HighestCust.FirstOrDefault();
 
+            //-------------------------------------------------------------------------------------------
 
             //customers above 100 naira
-            var CustomersAbove100 = db.tb_IncomingFabric.Where(x => x.Amount > 100).ToList();
+            //var CustomersAbove100 = db.tb_IncomingFabric.Include("tb_Branch").Where(x => x.Amount > 100).ToList();
 
-            ViewBag.CustomersAbove100 = CustomersAbove100;
+           // var CustomersAbove100 = db.tb_IncomingFabric.Where(x => x.Amount > 100).ToList();
 
-            //No of Active Customers
+            //-------------------------------------------------------------------------------------------
+            var CustomersAbove100 = from x in db.tb_IncomingFabric
+                                    join y in db.tb_Branch on x.tb_Branch.BranchId equals y.BranchId
+                                    where  x.Amount > 100
+                                    select x;
 
-            //var ActCust = from x in db.tb_Customers where x.IsNotActive == 1 select x.
+            ViewBag.CustomersAbove100 = CustomersAbove100.ToList();
+
+  //-------------------------------------------------------------------------------------------
+
+                                    //var CustomersAbove100 = db.tb_IncomingFabric.Select(x => new
+                                    //{
+                                    //    Cust_Name = x.Cust_Name,
+                                    //    Inv_No = x.Inv_No,
+                                    //    Branch = x.tb_Branch.Branchname
+                                    //}).ToList();
+                                    //-------------------------------------------------------------------------------------------
+
+                                    //var CustomersAbove100 = from x in db.tb_IncomingFabric
+                                    //                        join y in db.tb_Branch on x.tb_Branch.BranchId equals y.BranchId
+                                    //                        select new
+                                    //                        {
+                                    //                            Cust_Name = x.Cust_Name,
+                                    //                            Inv_No = x.Inv_No,
+                                    //                            Branch = y.Branchname
+                                    //                        };
+                                    //-------------------------------------------------------------------------------------------
+                                    //var Cus = (from x in db.tb_IncomingFabric where x.Amount > 100 join y in db.tb_Branch on x.BranchId equals y.BranchId
+                                    //           select new
+                                    //           {
+                                    //               Cust_Name = x.Cust_Name,
+                                    //               Inv_No = x.Inv_No,
+                                    //           Branch = y.Branchname
+                                    //           }).ToList();
+                                    //ViewBag.CusAbove100 = Cus;
+
+                                    //-------------------------------------------------------------------------------------------
+                                    //No of Active Customers
+                                    //var ActCust = from x in db.tb_Customers where x.IsNotActive == 1 select x.
             var ActCust = db.tb_Customers.Where(x => x.IsNotActive == false).Count();
-
             ViewBag.NoOfActiveCustomers = ActCust;
 
             //No of InActive Customers

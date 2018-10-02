@@ -33,11 +33,10 @@
             </div>
         </div>
     </div>*@
-<!-- Tell the browser to be responsive to screen width 
+<!-- Tell the browser to be responsive to screen width
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
  Bootstrap 3.3.7 -->
 <!--<link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">-->
-
 <!-- Font Awesome -->
 <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
@@ -79,34 +78,34 @@
 
 @*--------------------CSS-------------------------*@
 @*<!-- Morris chart -->
-<link rel="stylesheet" href="../../bower_components/morris.js/morris.css">
-<!-- jvectormap -->
-<link rel="stylesheet" href="../../bower_components/jvectormap/jquery-jvectormap.css">
-<!-- Date Picker -->
-<link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<!-- Daterange picker -->
-<link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
-<!-- bootstrap wysihtml5 - text editor -->
-<link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">*@
+    <link rel="stylesheet" href="../../bower_components/morris.js/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="../../bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="../../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="../../bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">*@
 
 @*--------------------Javascript-------------------------*@
 @*<!-- jvectormap -->
-<script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="../../bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<!-- Morris.js charts -->
-<script src="../../bower_components/raphael/raphael.min.js"></script>
-<script src="../../bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="../../bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
-<!-- daterangepicker -->
-<script src="../../bower_components/moment/min/moment.min.js"></script>
-<script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>*@
+    <script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="../../bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="../../bower_components/raphael/raphael.min.js"></script>
+    <script src="../../bower_components/morris.js/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="../../bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="../../bower_components/moment/min/moment.min.js"></script>
+    <script src="../../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>*@
 
 
 
@@ -127,7 +126,7 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>ViewBag.TotNoOfFabrics</h3>
+                    <h3>@ViewBag.TotNoOfFabrics</h3>
                     <p>Tot. No. of Fabrics Received so Far.</p>
                 </div>
                 <div class="icon">
@@ -141,7 +140,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>ViewBag.Gain<sup style="font-size: 20px">%</sup></h3>
+                    <h3>@ViewBag.Gain<sup style="font-size: 20px">%</sup></h3>
                     <p>Progress</p>
                 </div>
                 <div class="icon">
@@ -271,43 +270,59 @@
     <table class="table table-responsive table-striped display" id="ClientsTable" style="margin-top:20px">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>SurName</th>
-                <th>Other Names</th>
-                <th>Gender</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Walk in Date</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Customer Name</th>
+                <th>Invoice Number</th>
+                <th>Branch</th>
+
+                @*<th>Gender</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Walk in Date</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>*@
             </tr>
         </thead>
         <tbody>
-                        @if (ViewBag.CustomersAbove100 != null)
+            @if (ViewBag.CustomersAbove100 != null)
             {
                 foreach (var item in ViewBag.CustomersAbove100)
                 {
-                                @*<tr id="row_@item.CustID">*@
-                                <tr>
-                                    <td>@item.Title</td>
-                                    @*<td>@item.SurName</td>
-                                    <td>@item.OtherNames</td>
-                                    <td>@item.Gendername</td>
-                                    <td>@item.Cust_Address</td>
-                                    <td>@item.Phone</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.CreatedDate</td>
-                                    <td><a class="btn btn-xs btn-danger" href="#" onclick="ConfirmDelete(@item.CustID)"><i class="glyphicon glyphicon-trash"></i></a></td>
-                                    <td><a class="btn btn-xs btn-success" href="#" onclick="ShowClient(@item.CustID)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                                    <td><a class="btn btn-xs btn-success" href="#" onclick="AddEditClient(@item.CustID)"><i class="glyphicon glyphicon-pencil"></i></a></td>*@
+                    @*<tr id="row_@item.CustID">*@
+                    <tr>
+                        <td>@item.Cust_Name</td>
+                        <td>@item.Inv_No</td>
+                        <td>@item.tb_Branch.Branchname</td>
 
-                                </tr>
+                        @* <td>@item.Title</td>
+                            <td>@item.SurName</td>
+                            <td>@item.OtherNames</td>
+                            <td>@item.Gendername</td>
+                            <td>@item.Cust_Address</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Email</td>
+                            <td>@item.CreatedDate</td>
+                            <td><a class="btn btn-xs btn-danger" href="#" onclick="ConfirmDelete(@item.CustID)"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            <td><a class="btn btn-xs btn-success" href="#" onclick="ShowClient(@item.CustID)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                            <td><a class="btn btn-xs btn-success" href="#" onclick="AddEditClient(@item.CustID)"><i class="glyphicon glyphicon-pencil"></i></a></td>*@
+
+                    </tr>
                 }
             }
         </tbody>
     </table>
+    @*@{ 
+        if (ViewBag.CusAbove100 != null)
+        {
+            foreach (var Clien in ViewBag.CusAbove100)
+            {
+                @Clien.Cust_Name;
+                @Clien.Inv_No;
+                @Clien.Branch
+            }
+        }
+    }*@
 
     <!-- /.row -->
     <!-- Main row -->

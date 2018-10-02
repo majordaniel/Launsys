@@ -114,7 +114,6 @@ namespace LaunSys.Controllers
             }
         }
 
-
         //-----------------------------Delete User----------------------------
         public JsonResult DeleteUser(int UserId)
         {
@@ -147,7 +146,7 @@ namespace LaunSys.Controllers
 
         }
 
-        //-----------------------------Add Edit----------------------------
+        //-----------------------------Add/Edit----------------------------
         public ActionResult AddEdit(int UserId)
         {
             LaunSysDBEntities db = new LaunSysDBEntities();
