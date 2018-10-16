@@ -25,7 +25,6 @@ namespace LaunSys.Models
 
 
         public string Title { get; set; }
-
         public string Gendername { get; set; }
 
 

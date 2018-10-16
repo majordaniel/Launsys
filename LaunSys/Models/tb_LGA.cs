@@ -34,5 +34,6 @@ namespace LaunSys.Models
         public virtual tb_Country tb_Country { get; set; }
         public virtual tb_State tb_State { get; set; }
         public virtual tb_Status tb_Status { get; set; }
+        public virtual tb_Status tb_Status1 { get; set; }
     }
 }

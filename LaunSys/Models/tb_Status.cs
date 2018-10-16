@@ -29,6 +29,8 @@ namespace LaunSys.Models
             this.tb_Titles = new HashSet<tb_Titles>();
             this.tb_Income = new HashSet<tb_Income>();
             this.tb_Expenses = new HashSet<tb_Expenses>();
+            this.tb_LGA1 = new HashSet<tb_LGA>();
+            this.tb_Receipt = new HashSet<tb_Receipt>();
         }
     
         public int StatusId { get; set; }
@@ -59,5 +61,9 @@ namespace LaunSys.Models
         public virtual ICollection<tb_Income> tb_Income { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Expenses> tb_Expenses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_LGA> tb_LGA1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Receipt> tb_Receipt { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace LaunSys.Models
             this.tb_City = new HashSet<tb_City>();
             this.tb_LGA = new HashSet<tb_LGA>();
             this.tb_State = new HashSet<tb_State>();
+            this.tb_Employees = new HashSet<tb_Employees>();
         }
     
         public int CountryId { get; set; }
@@ -34,5 +35,7 @@ namespace LaunSys.Models
         public virtual ICollection<tb_LGA> tb_LGA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_State> tb_State { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Employees> tb_Employees { get; set; }
     }
 }

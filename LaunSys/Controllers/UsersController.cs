@@ -91,7 +91,14 @@ namespace LaunSys.Controllers
                     tb_Users Users = new tb_Users();
                     Users.UserId = Model.UserId;
                     Users.Email = Model.Email;
-                    Users.Password = Model.Password;
+
+                    
+
+                         var pass = System.Text.Encoding.UTF8.GetBytes(Model.Password);
+                    Users.Password = Convert.ToBase64String(pass);
+
+                   // Users.Password = Model.Password;
+
                     Users.RoleId = Model.RoleId;
                     Users.DivisionId = Model.DivisionId;
                     Users.BranchId = Model.BranchId;

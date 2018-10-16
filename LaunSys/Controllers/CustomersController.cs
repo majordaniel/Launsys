@@ -22,9 +22,7 @@ namespace LaunSys.Controllers
             List<tb_Gender> GendersList = db.tb_Gender.ToList();
             ViewBag.ListOfGenders = new SelectList(GendersList, "GenderID", "Gendername");
 
-
-
-
+            
             return View();
         }
 

@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                
-                @Html.TextBoxFor(Model => Model.Password, new { @id = "Password", @class = "form-control", @placeholder = "Enter User Password" })
+                @Html.PasswordFor(Model => Model.Password, new { @id = "Password", @class = "form-control", @placeholder = "Enter User Password" })
                 @*@Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "error" })*@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
@@ -50,9 +50,6 @@
             </div>
             }
         @*</form>*@
-
-
-   
 
     </div>
     <!-- /.login-box-body -->

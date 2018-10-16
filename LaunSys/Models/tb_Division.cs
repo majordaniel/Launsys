@@ -18,6 +18,7 @@ namespace LaunSys.Models
         public tb_Division()
         {
             this.tb_Users = new HashSet<tb_Users>();
+            this.tb_Employees = new HashSet<tb_Employees>();
         }
     
         public int DivisionId { get; set; }
@@ -28,5 +29,7 @@ namespace LaunSys.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Users> tb_Users { get; set; }
         public virtual tb_Status tb_Status { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Employees> tb_Employees { get; set; }
     }
 }

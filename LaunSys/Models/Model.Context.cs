@@ -44,5 +44,7 @@ namespace LaunSys.Models
         public virtual DbSet<tb_Status> tb_Status { get; set; }
         public virtual DbSet<tb_Titles> tb_Titles { get; set; }
         public virtual DbSet<tb_Users> tb_Users { get; set; }
+        public virtual DbSet<tb_Employees> tb_Employees { get; set; }
+        public virtual DbSet<tb_Receipt> tb_Receipt { get; set; }
     }
 }

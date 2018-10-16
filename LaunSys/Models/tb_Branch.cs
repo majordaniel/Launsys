@@ -22,6 +22,8 @@ namespace LaunSys.Models
             this.tb_Income = new HashSet<tb_Income>();
             this.tb_IncomingFabric = new HashSet<tb_IncomingFabric>();
             this.tb_Users = new HashSet<tb_Users>();
+            this.tb_Employees = new HashSet<tb_Employees>();
+            this.tb_Receipt = new HashSet<tb_Receipt>();
         }
     
         public int BranchId { get; set; }
@@ -50,5 +52,9 @@ namespace LaunSys.Models
         public virtual ICollection<tb_IncomingFabric> tb_IncomingFabric { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Users> tb_Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Employees> tb_Employees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Receipt> tb_Receipt { get; set; }
     }
 }

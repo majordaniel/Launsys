@@ -10,6 +10,8 @@ namespace LaunSys.Controllers
 {
     public class ClientsController : Controller
     {
+        [HttpGet]
+        
         //-----------------------------Populate clients on the table----------------------------
         public ActionResult Index()
         {
@@ -21,7 +23,17 @@ namespace LaunSys.Controllers
             List<tb_Gender> GenderList = db.tb_Gender.ToList();
             ViewBag.VGenderLists = new SelectList(GenderList, "GenderID", "Gendername");
 
-            List<ClientsViewModel> ClientsList = db.tb_Customers.Where(x => x.IsNotActive == false).Select(x => new ClientsViewModel {Title=x.tb_Titles.Title,SurName=x.SurName,OtherNames=x.OtherNames,Gendername=x.tb_Gender.Gendername, Cust_Address=x.Cust_Address,Phone=x.Phone,Email=x.Email,CreatedDate=x.CreatedDate, CustID=x.CustID}).ToList();
+            List<ClientsViewModel> ClientsList = db.tb_Customers.Where(x => x.IsNotActive == false).Select(x => new ClientsViewModel
+            { Title=x.tb_Titles.Title,
+                SurName =x.SurName,
+                OtherNames =x.OtherNames,
+                Gendername =x.tb_Gender.Gendername,
+                Cust_Address =x.Cust_Address,
+                Phone =x.Phone,
+                Email =x.Email,
+                CreatedDate =x.CreatedDate,
+                CustID =x.CustID
+            }).ToList();
 
             ViewBag.ListOfClients = ClientsList;
 
@@ -123,7 +135,19 @@ namespace LaunSys.Controllers
             LaunSysDBEntities db = new LaunSysDBEntities();
 
           
-            List<ClientsViewModel> ClientDetail = db.tb_Customers.Where(x => x.IsNotActive == false && x.CustID== CustID).Select(x => new ClientsViewModel { Title = x.tb_Titles.Title, SurName = x.SurName, OtherNames = x.OtherNames, Gendername = x.tb_Gender.Gendername, Cust_Address = x.Cust_Address, Phone = x.Phone, Email = x.Email, CreatedDate = x.CreatedDate, CustID = x.CustID }).ToList();
+            List<ClientsViewModel> ClientDetail = db.tb_Customers.Where
+                (x => x.IsNotActive == false && x.CustID== CustID)
+                .Select(x => new ClientsViewModel
+                { Title = x.tb_Titles.Title,
+                    SurName = x.SurName,
+                    OtherNames = x.OtherNames,
+                    Gendername = x.tb_Gender.Gendername,
+                    Cust_Address = x.Cust_Address,
+                    Phone = x.Phone,
+                    Email = x.Email,
+                    CreatedDate = x.CreatedDate,
+                    CustID = x.CustID
+                }).ToList();
 
             ViewBag.SingleClientDetail = ClientDetail;
 

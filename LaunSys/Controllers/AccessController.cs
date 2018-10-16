@@ -32,51 +32,68 @@ namespace LaunSys.Controllers
         [HttpPost]
         public ActionResult LoginUser(UsersViewModel Model)
         {
-            LaunSysDBEntities db = new LaunSysDBEntities();
-            tb_Users User = db.tb_Users.SingleOrDefault(x=>x.Email== Model.Email && x.Password== Model.Password);
-
-            string result = "fail";
-            if (User!=null)
+            if (ModelState.IsValid)
             {
-                Session["Email"] = User.Email;
-                Session["Password"] = User.Password;
-                Session["UserDepartment"] = User.tb_Department.Deptname;
-                Session["UserRole"] = User.tb_Role.Rolename;
+                LaunSysDBEntities db = new LaunSysDBEntities();
 
-                if (User.RoleId == 1 )
+
+
+                var pass = System.Text.Encoding.UTF8.GetBytes(Model.Password);
+               var encpass = Convert.ToBase64String(pass);
+
+               tb_Users User = db.tb_Users.SingleOrDefault(x => x.Email == Model.Email && x.Password == encpass);
+
+                 //tb_Users User = db.tb_Users.SingleOrDefault(x => x.Email == Model.Email && x.Password == Model.Password);
+
+                string result = "fail";
+                if (User != null)
                 {
-                    result = "Admin";
-                    return RedirectToAction("Index", "Clients");
+                    Session["Email"] = User.Email;
+                    Session["Password"] = User.Password;
+                    Session["UserDepartment"] = User.tb_Department.Deptname;
+                    Session["UserRole"] = User.tb_Role.Rolename;
+
+                    if (User.RoleId == 1)
+                    {
+                        result = "Admin";
+                        return RedirectToAction("Index", "Clients");
+                    }
+                    else if (User.RoleId == 2)
+                    {
+                        result = "Manager";
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-                else if (User.RoleId == 2)
+                else
                 {
-                    result = "Manager";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Access");
                 }
+                if (result == "fail")
+                {
+                    FlashMessage.Confirmation("Invalid Login Details");
+                    return RedirectToAction("Login", "Access");
+                }
+                //if (result == "Admin")
+                //{
+                //    return RedirectToAction("Index", "Clients");
+                //}
+                //if (result == "Manager")
+                //{
+
+                //}
+
+                //return Json(result, JsonRequestBehavior.AllowGet);
             }
-            if (result == "fail")
-            {
-                FlashMessage.Confirmation("Invalid Login Details");
-                return RedirectToAction("Login", "Access");
-            }
-            //if (result == "Admin")
-            //{
-            //    return RedirectToAction("Index", "Clients");
-            //}
-            //if (result == "Manager")
-            //{
-             
-            //}
             return View();
-            //return Json(result, JsonRequestBehavior.AllowGet);
         }
-       
+
 
         public ActionResult LogOut()
         {
-            Session.Clear();
+            //Session.Clear();
             Session.Abandon();
-           return RedirectToAction("Login");
+            Session.Contents.RemoveAll();
+            return RedirectToAction("Login");
         }
     }
 }

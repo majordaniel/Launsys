@@ -102,6 +102,10 @@ namespace LaunSys.Controllers
             var InActCust = db.tb_Customers.Where(x => x.IsNotActive == true).Count();
             ViewBag.NoOfInActiveCustomers = InActCust;
 
+            //Total No of  Customers
+            var TotalCust = db.tb_Customers.Count();
+            ViewBag.TotalCustomers = TotalCust;
+
             return View();
         }
 
