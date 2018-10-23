@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LaunSys.Common")]
+[assembly: AssemblyTitle("LaunSys.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LaunSys.Common")]
+[assembly: AssemblyProduct("LaunSys.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ecaca38e-88f7-4357-8092-c7af91484b51")]
+[assembly: Guid("392cd87e-4802-4b75-a79d-06095ae6b658")]
 
 // Version information for an assembly consists of the following four values:
 //
