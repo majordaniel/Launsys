@@ -9,23 +9,122 @@ namespace LaunSys.Controllers
 {
     public class ExpensesController : Controller
     {
+        LaunSysDBEntities db = new LaunSysDBEntities();
+
+
+        //------------------------to set the data for the drop downn----------------
+        public void AllDropDowns()
+        {
+            List<tb_Branch> BranchList = db.tb_Branch.ToList();
+            ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
+
+
+            List<tb_Status> StatusList = db.tb_Status.ToList();
+            ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
+
+        }
+
         // GET: Expenses
         public ActionResult Index()
         {
-            //LaunSysDBEntities db = new LaunSysDBEntities();
 
-            //List<tb_Branch> BranchList = db.tb_Branch.ToList();
-            //ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
+            AllDropDowns();
 
 
-            //List<tb_Status> StatusList = db.tb_Status.ToList();
-            //ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
-
-            //List<IncomesViewModel> IncomeList = db.tb_Income.Where(x => x.tb_Status.Status == true).Select(x => new IncomesViewModel { Date = x.Date, Inc_SN = x.Inc_SN, Description = x.Description, Inv_No = x.Inv_No, Amount = x.Amount, Branchname = x.tb_Branch.Branchname, Id = x.Id }).ToList();
-
-            //ViewBag.ListOfIncomeData = IncomeList;
+            
+            List<ExpensesViewModel> ExpensesList = db.tb_Expenses.Where(x => x.tb_Status.Status == true).Select(x => new ExpensesViewModel { Date = x.Date, Exp_SN = x.Exp_SN, Description = x.Description, Inv_No = x.Inv_No, Amount = x.Amount, Branchname = x.tb_Branch.Branchname, Id = x.Id }).ToList();
+            ViewBag.ListOfExpensesData = ExpensesList;
 
             return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Index(ExpensesViewModel Model)
+        {
+            try
+            {
+                AllDropDowns();
+
+                //TO UPDATE EXISITING RECORD
+                if (Model.Id > 0)
+                {
+                    tb_Expenses ExpensesData = db.tb_Expenses.SingleOrDefault(x => x.Id == Model.Id && x.tb_Status.Status == true);
+                    ExpensesData.Id = Model.Id;
+                    ExpensesData.Date = Model.Date;
+                    ExpensesData.Exp_SN = Model.Exp_SN;
+                    ExpensesData.Description = Model.Description;
+                    ExpensesData.Inv_No = Model.Inv_No;
+                    ExpensesData.Amount = Model.Amount;
+                    ExpensesData.BranchId = Model.BranchId;
+                    ExpensesData.StatusId = Model.StatusId;
+
+                    db.SaveChanges();
+                }
+                else
+                { //TO INSERT NEW EXPENSES DATA
+                    tb_Expenses ExpensesData = new tb_Expenses();
+                    ExpensesData.Id = Model.Id;
+                    ExpensesData.Date = Model.Date;
+                    ExpensesData.Exp_SN = Model.Exp_SN;
+                    ExpensesData.Description = Model.Description;
+                    ExpensesData.Inv_No = Model.Inv_No;
+                    ExpensesData.Amount = Model.Amount;
+                    ExpensesData.BranchId = Model.BranchId;
+                    ExpensesData.StatusId = Model.StatusId;
+                    db.tb_Expenses.Add(ExpensesData);
+                    db.SaveChanges();
+
+                }
+
+                return View(Model);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        //-DELETE EXPENSES
+        public JsonResult DeleteExpenses(int Id)
+        {
+            bool result = false;
+            tb_Expenses Expenses = db.tb_Expenses.SingleOrDefault(x => x.tb_Status.Status == true && x.Id == Id);
+        if(Expenses !=null)
+            {
+                Expenses.tb_Status.Status = false;
+                db.SaveChanges();
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        //----- to view expensis detail Individually
+        public ActionResult ViewExpenses(int Id)
+        {
+            List<ExpensesViewModel> ExpensesDetail = db.tb_Expenses.Where(x => x.tb_Status.Status == true && x.Id == Id).Select(
+                x => new ExpensesViewModel
+                {
+                    Date = x.Date,
+                    Exp_SN = x.Exp_SN,
+                    Description = x.Description,
+                    Inv_No = x.Inv_No,
+                    Amount = x.Amount,
+                    Branchname = x.tb_Branch.Branchname,
+                    Status = x.tb_Status.Status
+
+                }).ToList();
+            ViewBag.SingleExpensesDetail = ExpensesDetail;
+            return PartialView("SingleExpensesView");
+        }
+        //---------------------Add Edit-------------------------------
+    public ActionResult AddEdit(int Id)
+        {
+            AllDropDowns();
+
+            return PartialView();
         }
     }
 }

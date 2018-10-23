@@ -7528,11 +7528,12 @@
     <Content Include="Views\Income\SingleIncomeView.cshtml" />
     <Content Include="Views\Income\AddEditViewPartialView.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\Expenses\SingleExpensesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="plugins\" />
-    <Folder Include="Views\Expenses\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

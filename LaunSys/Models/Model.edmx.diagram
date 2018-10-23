@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="922a4d691d7845e3a42cf6ac518870ba" Name="Diagram1" ZoomLevel="93">
+      <Diagram DiagramId="922a4d691d7845e3a42cf6ac518870ba" Name="Diagram1" ZoomLevel="52">
         <EntityTypeShape EntityType="LaunSysDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LaunSysDBModel.tb_Branch" Width="1.5" PointX="13.75" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LaunSysDBModel.tb_City" Width="1.5" PointX="16.75" PointY="10.625" IsExpanded="true" />

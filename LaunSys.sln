@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaunSys", "LaunSys\LaunSys.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login.BL", "Login.BL\Login.BL.csproj", "{51F6E565-064C-4909-A821-A6251E4E235E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaunSys.Common", "LaunSys.Common\LaunSys.Common.csproj", "{ECACA38E-88F7-4357-8092-C7AF91484B51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{51F6E565-064C-4909-A821-A6251E4E235E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51F6E565-064C-4909-A821-A6251E4E235E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51F6E565-064C-4909-A821-A6251E4E235E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECACA38E-88F7-4357-8092-C7AF91484B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECACA38E-88F7-4357-8092-C7AF91484B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECACA38E-88F7-4357-8092-C7AF91484B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECACA38E-88F7-4357-8092-C7AF91484B51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
