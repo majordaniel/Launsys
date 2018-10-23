@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LaunSys.Data.Model_Generated;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

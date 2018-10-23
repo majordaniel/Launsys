@@ -1,4 +1,5 @@
-﻿using LaunSys.Models;
+﻿using LaunSys.Data.Model_Generated;
+using LaunSys.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

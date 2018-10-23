@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using LaunSys.Models;
+using LaunSys.Data.Model_Generated;
 
 namespace LaunSys.Controllers
 {
