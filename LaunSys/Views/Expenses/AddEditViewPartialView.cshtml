@@ -1,0 +1,69 @@
+﻿@model LaunSys.Models.ExpensesViewModel
+
+<form id="ExpensesInfoForm">
+    @Html.HiddenFor(Model=>Model.Id)
+    @Html.TextBoxFor(Model=>Model.Date,"", new { @id="Date",@class="form-control",@placeholder ="Enter Expenses Date"})
+    @Html.ValidationMessageFor(Model=>Model.Date,"", new { @class="error"})
+
+    @Html.TextBoxFor(Model => Model.Exp_SN, new { @id = "Exp_SN", @class = "form-control", @placeholder = "Enter User Inc_SN" })
+    @*@Html.ValidationMessageFor(Model => Model.Inc_SN, "", new { @class = "error" })*@
+
+
+    @Html.TextBoxFor(Model => Model.Description, new { @id = "Description", @class = "form-control", @placeholder = "Enter User Description" })
+    @Html.ValidationMessageFor(Model => Model.Description, "", new { @class = "error" })
+
+    @Html.TextBoxFor(Model => Model.Inv_No, new { @id = "Inv_No", @class = "form-control", @placeholder = "Enter User Inv_No" })
+    @*@Html.ValidationMessageFor(Model => Model.Inv_No, "", new { @class = "error" })*@
+
+
+    @Html.TextBoxFor(Model => Model.Amount, new { @id = "Amount", @class = "form-control", @placeholder = "Enter User Amount" })
+    @Html.ValidationMessageFor(Model => Model.Amount, "", new { @class = "error" })
+
+
+    @Html.DropDownListFor(Model => Model.BranchId, ViewBag.VBranchLists as SelectList, "---Select Branch---", new { @id = "BranchId", @class = "form-control" })
+    @Html.ValidationMessageFor(Model => Model.BranchId, "", new { @class = "error" })
+
+    @Html.DropDownListFor(Model => Model.StatusId, ViewBag.VStatusLists as SelectList, "---Select Status---", new { @id = "StatusId", @class = "form-control" })
+    @Html.ValidationMessageFor(Model => Model.StatusId, "", new { @class = "error" })
+
+
+    <a href="#" id="btnsubmit" class="btn btn-success btn-block">
+        @if (Model.Id > 0)
+        {<span>Update</span>}
+        else
+        {<span>Save</span>}
+    </a>
+
+</form>
+<div style="text-align:center; display:none" id="loaderDiv">
+    <img src="~/Content/loading.gif" width="100" />
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+     <script>
+         $("#btnsubmit").click(function () {
+             $("#loaderDiv").show();
+             var data = $("#ExpensesInfoForm").serialize();
+             if (!$("#ExpensesInfoForm").valid()) {
+                 return false;
+             }
+             $.ajax({
+                 type: "POST",
+                 url: "/Expenses/Index",
+
+                 data: data,
+                 success: function (response) {
+
+                     $("#loaderDiv").hide();
+                     alert("Expenses Modified/Inserted");
+                     //$("#ClientModal").modal("hide");
+                     window.location.href = "/Expenses/Index";
+                 }
+             })
+         })
+     
+     
+     </script>
+  

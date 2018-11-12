@@ -1,4 +1,7 @@
-﻿using LaunSys.Data.Model_Generated;
+﻿using LaunSys.Common;
+using LaunSys.Data.Model_Generated;
+
+//using LaunSys.Business.Common;
 using LaunSys.Models;
 using System;
 using System.Collections.Generic;
@@ -14,14 +17,15 @@ namespace LaunSys.Controllers
     public class IncomeController : Controller
     {
               LaunSysDBEntities db = new LaunSysDBEntities();
-
+        Controls Cont = new Controls();
 
         //------------------------to set the data for the drop downn----------------
         public void AllDropDown()
         {
-            List<tb_Branch> BranchList = db.tb_Branch.ToList();
-            ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
 
+            //List<tb_Branch> BranchList = db.tb_Branch.ToList();
+            var Branches = Cont.BranchList();
+            ViewBag.VBranchLists = new SelectList(Branches, "BranchId", "Branchname");
 
             List<tb_Status> StatusList = db.tb_Status.ToList();
             ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
@@ -30,11 +34,20 @@ namespace LaunSys.Controllers
         // GET: Income
         public ActionResult Index()
         {
+           // LaunSysDBEntities db = new LaunSysDBEntities();
 
             AllDropDown();
             // the Listings
 
-            List<IncomesViewModel> IncomeList = db.tb_Income.Where(x => x.tb_Status.Status == true).Select(x => new IncomesViewModel { Date = x.Date, Inc_SN = x.Inc_SN, Description = x.Description, Inv_No = x.Inv_No, Amount = x.Amount, Branchname = x.tb_Branch.Branchname, Id = x.Id }).ToList();
+            List<IncomesViewModel> IncomeList = db.tb_Income.Where(x => x.tb_Status.Status == true).Select(x => new IncomesViewModel
+            {
+                Date = x.Date,
+                Inc_SN = x.Inc_SN,
+                Description = x.Description,
+                Inv_No = x.Inv_No,
+                Amount = x.Amount,
+                Branchname = x.tb_Branch.Branchname,
+                Id = x.Id }).ToList();
             ViewBag.ListOfIncomeData = IncomeList;
 
 
@@ -115,7 +128,7 @@ namespace LaunSys.Controllers
             if (Income != null)
             {
                 //set the customer id to true, there fore hide it from the table\
-                Income.tb_Status.Status = false;
+                Income.StatusId = 2;
                 db.SaveChanges();
                 result = true;
             }
@@ -154,6 +167,9 @@ namespace LaunSys.Controllers
 
             List<tb_Status> StatusList = db.tb_Status.ToList();
             ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
+
+            //initialize the View model responsible for the Editing
+            //To get the record that is to be edited
 
             IncomesViewModel Model = new IncomesViewModel();
 

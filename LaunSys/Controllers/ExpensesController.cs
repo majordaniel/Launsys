@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+
+
 namespace LaunSys.Controllers
 {
     public class ExpensesController : Controller
@@ -19,6 +22,7 @@ namespace LaunSys.Controllers
             List<tb_Branch> BranchList = db.tb_Branch.ToList();
             ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
 
+            //Common comm = 
 
             List<tb_Status> StatusList = db.tb_Status.ToList();
             ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
@@ -94,7 +98,8 @@ namespace LaunSys.Controllers
             tb_Expenses Expenses = db.tb_Expenses.SingleOrDefault(x => x.tb_Status.Status == true && x.Id == Id);
         if(Expenses !=null)
             {
-                Expenses.tb_Status.Status = false;
+                Expenses.StatusId =2;
+            
                 db.SaveChanges();
                 result = true;
             }
@@ -124,8 +129,27 @@ namespace LaunSys.Controllers
     public ActionResult AddEdit(int Id)
         {
             AllDropDowns();
+            //initialize the viewModel responsible for the  Editing
+            //To get the record that is to be edited
 
-            return PartialView();
+            ExpensesViewModel Model = new ExpensesViewModel();
+            if (Id > 0)
+            {
+                tb_Expenses Expenses = db.tb_Expenses.SingleOrDefault(x => x.Id == Id && x.tb_Status.Status == true);
+                Model.Id = Expenses.Id;
+                Model.Date = Expenses.Date;
+                Model.Exp_SN = Expenses.Exp_SN;
+                Model.Description = Expenses.Description;
+                Model.Inv_No = Expenses.Inv_No;
+                Model.Amount = Expenses.Amount;
+                Model.BranchId = Expenses.BranchId;
+                Model.StatusId = Expenses.StatusId;
+            }
+            //returning resultclass (string viewName, Object Model)
+            // return View();
+
+            return PartialView("AddEditViewPartialView", Model);
+            
         }
     }
 }

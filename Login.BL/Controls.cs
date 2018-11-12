@@ -15,17 +15,19 @@ namespace LaunSys.Common
 
 
         //------------------------to set the data for the drop downn----------------
-        public void AllDropDowns()
+        public void BranchList()
         {
+           
             List<tb_Branch> BranchList = db.tb_Branch.ToList();
 
-
             //ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
-
-
-            //List<tb_Status> StatusList = db.tb_Status.ToList();
             //ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
+            
 
+        }
+        public void StatusList()
+        {
+            List<tb_Status> StatusList = db.tb_Status.ToList();
         }
     }
 }

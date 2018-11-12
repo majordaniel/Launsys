@@ -103,7 +103,7 @@
 
         @*------------------modal to view individual Client -------------------------*@
 
-        <div class="modal fade" id="ViewSingleUserModal">
+        <div class="modal fade" id="ViewSingleIncomeModal">
             <div class="modal-dialog" style="width: 300px; height: 520px !important;">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -172,7 +172,7 @@
 
 
     //--------------------------perform the deletion-----------------------
-    var DeleteUser = function () {
+    var DeleteIncome = function () {
 
         $("#loaderDiv").show();
         var Id = $("#HiddenIncomeID").val();
@@ -197,7 +197,7 @@
         //====================THIS======================
         //var url = "/Clients/ViewClient?CustID=" + CustID;
         //$("#SingularInfoDiv").load(url, function () {
-        //    $("#ViewSingleUserModal").modal("show");
+        //    $("#ViewSingleIncomeModal").modal("show");
         //})
 
         //====================OR======================
@@ -209,7 +209,7 @@
             success: function (response) {
 
                 $("#SingularInfoDiv").html(response);
-                $("#ViewSingleUserModal").modal("show");
+                $("#ViewSingleIncomeModal").modal("show");
 
             }
         })

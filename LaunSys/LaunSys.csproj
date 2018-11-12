@@ -7424,6 +7424,7 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
     <Content Include="Views\Expenses\SingleExpensesView.cshtml" />
+    <Content Include="Views\Expenses\AddEditViewPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7433,6 +7434,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LaunSys.Business\LaunSys.Business.csproj">
+      <Project>{d124e1a2-4ad7-42e2-884d-cdf92664c2da}</Project>
+      <Name>LaunSys.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LaunSys.Data\LaunSys.Data.csproj">
       <Project>{392cd87e-4802-4b75-a79d-06095ae6b658}</Project>
       <Name>LaunSys.Data</Name>
