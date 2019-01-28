@@ -9,25 +9,40 @@ using System.Web;
 
 namespace LaunSys.Common
 {
-    class Controls
+    public class Controls
     {       
         LaunSysDBEntities db = new LaunSysDBEntities();
 
 
         //------------------------to set the data for the drop downn----------------
-        public void BranchList()
+        //public string BranchList()
+        //{
+        //   return List<tb_Branch> BranchList = db.tb_Branch.ToList();
+
+        //    //return BranchList;
+        //}
+
+        public List<tb_Branch> BranchList()
         {
-           
-            List<tb_Branch> BranchList = db.tb_Branch.ToList();
-
-            //ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
-            //ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
-            
-
+            var AllBranches = db.tb_Branch.ToList();
+            return AllBranches;
         }
+
         public void StatusList()
         {
             List<tb_Status> StatusList = db.tb_Status.ToList();
         }
+
+
+        //public List<student> GetAllStudent(out List<course> ListOfCourse)
+        //{
+        //    var ListAllStudent = dbContext.Students.ToList();
+        //    var ListOfCourse = dbContext.Students.Courses.ToList();
+
+        //    return ListAllStudent;
+        //}
+
+
+
     }
 }

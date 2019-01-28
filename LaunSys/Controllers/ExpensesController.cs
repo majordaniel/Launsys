@@ -109,8 +109,8 @@ namespace LaunSys.Controllers
                 (x => x.tb_Status.Status == true && x.Id == Id);
         if(Expenses !=null)
             {
-                //Expenses.tb_Status.Status = false;
-                Expenses.StatusId = 2;
+                Expenses.StatusId =2;
+            
                 db.SaveChanges();
                 result = true;
             }
@@ -159,7 +159,7 @@ namespace LaunSys.Controllers
             //returning resultclass (string viewName, Object Model)
             // return View();
 
-            return PartialView("AddEditViewPartialView",Model);
+            return PartialView("AddEditViewPartialView", Model);
             
         }
     }

@@ -83,7 +83,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Delete Income?</h3>
+                        <h3 class="modal-title">Delete Expense</h3>
                         <a href="#" class="close" data-dismiss="modal">&times;</a>
                     </div>
                     <div class="modal-body">
@@ -104,7 +104,7 @@
 
         @*------------------modal to view individual Client -------------------------*@
 
-        <div class="modal fade" id="ViewSingleUserModal">
+        <div class="modal fade" id="ViewSingleExpensesModal">
             <div class="modal-dialog" style="width: 300px; height: 520px !important;">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -128,7 +128,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Add Edit Income Details</h3>
+                        <h3 class="modal-title">Add Edit Expenses Details</h3>
                         <a href="#" class="close" data-dismiss="modal">&times;</a>
                     </div>
                     <div class="modal-body" id="AddEditModalBody">
@@ -229,6 +229,21 @@
       //    })
       //});
   }
+
+  }
+
+
+      //-------------------------alternatively---------------
+      //function AddEditExpenses(Id) {
+      //    var url="/Expenses/AddEdit?Id=" + Id;
+      //    //-append to the Body of the AddEditModal
+      //    $("#AddEditModalBody").load(url,function(){
+      //        //open the Modal at the same time
+      //        $("#AddEditExpensesModalDiv").modal("show");
+      //    })
+
+      //}
+  
 </script>
 
 }

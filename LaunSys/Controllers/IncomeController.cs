@@ -1,4 +1,7 @@
-﻿using LaunSys.Data.Model_Generated;
+﻿using LaunSys.Common;
+using LaunSys.Data.Model_Generated;
+
+//using LaunSys.Business.Common;
 using LaunSys.Models;
 using System;
 using System.Collections.Generic;
@@ -14,14 +17,15 @@ namespace LaunSys.Controllers
     public class IncomeController : Controller
     {
               LaunSysDBEntities db = new LaunSysDBEntities();
-
+        Controls Cont = new Controls();
 
         //------------------------to set the data for the drop downn----------------
         public void AllDropDown()
         {
-            List<tb_Branch> BranchList = db.tb_Branch.ToList();
-            ViewBag.VBranchLists = new SelectList(BranchList, "BranchId", "Branchname");
 
+            //List<tb_Branch> BranchList = db.tb_Branch.ToList();
+            var Branches = Cont.BranchList();
+            ViewBag.VBranchLists = new SelectList(Branches, "BranchId", "Branchname");
 
             List<tb_Status> StatusList = db.tb_Status.ToList();
             ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
@@ -30,6 +34,7 @@ namespace LaunSys.Controllers
         // GET: Income
         public ActionResult Index()
         {
+           // LaunSysDBEntities db = new LaunSysDBEntities();
 
             AllDropDown();
             // the Listings
