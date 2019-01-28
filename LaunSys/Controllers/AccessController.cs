@@ -67,11 +67,19 @@ namespace LaunSys.Controllers
                 }
                 else
                 {
+                    //FlashMessage.Info("Your informational message");
+                    //FlashMessage.Confirmation("Your confirmation message");
+                    //FlashMessage.Warning("Your warning message");
+                    //FlashMessage.Danger("Your danger alert");
+                    //FlashMessage.Danger("Message title", "Your danger alert");
+
+                    FlashMessage.Confirmation("Invalid Login Details");
                     return RedirectToAction("Login", "Access");
+                   
                 }
                 if (result == "fail")
                 {
-                    FlashMessage.Confirmation("Invalid Login Details");
+                    FlashMessage.Confirmation("Invalid Login failed");
                     return RedirectToAction("Login", "Access");
                 }
                 //if (result == "Admin")

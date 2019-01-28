@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Incoming Fabrics Manager</h2>
+
+<div class="row">
+
+        <div class="col-sm-6">
+            <span>Customer</span>
+
+            @*------------this select dropdown list only pass the Customer name as the Value----------*@
+            <select id="SelCustname" class="form-control">
+               <option value="No Name">--------select Name---------</option>
+               @foreach (var item in ViewBag.AllCustomers)
+               {
+                   @*<option value="@item"> @item</option>*@
+                @*<option value="@item.Id"> @item.Id - @item.Name </option>*@
+                <option value="@item.Name"> @item.Id - @item.Name </option>
+               }
+            </select>
+
+
+            <span>Recept No:</span><input type="text" name="" class="form-control" id="txtRecieptNo" value="" placeholder="Enter Reciept No" />
+       
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+          
+            <span>Total Amount:</span><input type="text" name="" class="form-control" id="txtTotalAmount" value="" placeholder="Enter Total Amount" />
+
+            <span>Branch</span>
+            @*------------this select dropdown list only pass the BranchID as the Value----------*@
+            <select id="SelBranchId" class="form-control"> 
+
+                <option value=""> --------select Branch---------</option>
+    @foreach (var item in ViewBag.AllBranches)
+    {
+        @*<option value="@item"> @item</option>*@
+        <option value="@item.BranchId"> @item.BranchName</option>
+
+        
+    }
+
+
+            </select>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3><span>Fabrics Details and Descriptions</span></h3>
+        </div>
+      
+    </div>
+
+<div class="row">
+    <table class="table table-bordered">
+        <tr>
+            <td>Description:</td>
+            <td>Qty:</td>
+            <td>Unit Price:</td>
+            <td>Total:</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" class="form-control" id="txtDesc" value="" placeholder="Enter Fabrtic Description" />
+                <span>Ref Description required</span>
+            </td>
+            <td>
+                <input type="text" class="form-control" id="txtQty" value="" placeholder="Enter Qty" />
+                <span>Ref Qty required</span>
+            </td>
+            <td>
+                <input type="text" class="form-control" id="txtUnitPrice" value="" placeholder="Enter Unit Price" />
+                <span>Ref Unit Price required</span>
+            </td>
+            <td>
+                <input type="text" class="form-control" id="txtTotal" value="" placeholder="Enter Total" />
+                <span>Ref Total Amount required</span>
+            </td>
+
+
+            <td>
+                <input type="button" id="btnAddDescription" class="form-control btn btn-info" value="Add Description" />
+
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <div id="RefDescriptionList">
+
+    </div>
+    <div class="row">
+        <input type="button" id="btnSaveAll" class="form-control btn btn-info" value="SAVE INCOMING FABRIC" />
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function myfunction() {
+
+    //Add button click
+            //validate inpute items before adding to list
+
+     //Add the Items to list               
+
+
+
+ //SAVING ALL RECORDS TO THE DATABASE
+
+            //validate / Check if the items table is empty
+
+
+        })
+    </script>
+    
+    }
+
+
+
+<style>
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 70%;
+    }
+</style>
+

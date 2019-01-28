@@ -12,18 +12,15 @@ namespace LaunSys.Data.Model_Generated
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_FabricDescription
+    public partial class tb_Incoming_Fabric_Desc
     {
-        public int Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string Cust_Name { get; set; }
-        public Nullable<int> Tot_Fabric { get; set; }
-        public string Inv_No { get; set; }
-        public Nullable<int> Fab_SN { get; set; }
+        public int IncFabDescId { get; set; }
+        public Nullable<int> IncFabId { get; set; }
         public string Description { get; set; }
-        public string Label { get; set; }
-        public Nullable<int> BranchId { get; set; }
+        public Nullable<int> Qty { get; set; }
+        public Nullable<decimal> Unit_Price { get; set; }
+        public Nullable<decimal> Total_Amt { get; set; }
     
-        public virtual tb_Branch tb_Branch { get; set; }
+        public virtual tb_Incoming_Fabrics tb_Incoming_Fabrics { get; set; }
     }
 }

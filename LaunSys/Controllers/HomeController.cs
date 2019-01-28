@@ -27,12 +27,12 @@ namespace LaunSys.Controllers
             ViewBag.Gain = Gain;
 
             //total no of Fabrics
-            var TotNoOfFabrics = (from x in db.tb_IncomingFabric select x.Id).Count();
+            var TotNoOfFabrics = (from x in db.tb_Incoming_Fabrics select x.IncFabId).Count();
             ViewBag.TotNoOfFabrics = TotNoOfFabrics;
 
             //total fabric by each customer
 
-            var TotFabByCustomer = from x in db.tb_IncomingFabric
+            var TotFabByCustomer = from x in db.tb_Incoming_Fabric_Desc
                                    group x by x.Qty into y
                                    select new
                                    {
@@ -42,11 +42,11 @@ namespace LaunSys.Controllers
 
 
             //Highest paid Customer
-            var amt = (from x in db.tb_IncomingFabric select x.Amount).Max();
+            var amt = (from x in db.tb_Incoming_Fabrics select x.Total_Amt).Max();
 
-            var HighestCust = from x in db.tb_IncomingFabric
-                              where x.Amount == amt
-                              select x.Cust_Name;
+            var HighestCust = from x in db.tb_Incoming_Fabrics
+                              where x.Total_Amt == amt
+                              select x.Customer_Name;
 
             ViewBag.HighestPaidCust = HighestCust.FirstOrDefault();
 
@@ -58,9 +58,9 @@ namespace LaunSys.Controllers
            // var CustomersAbove100 = db.tb_IncomingFabric.Where(x => x.Amount > 100).ToList();
 
             //-------------------------------------------------------------------------------------------
-            var CustomersAbove100 = from x in db.tb_IncomingFabric
+            var CustomersAbove100 = from x in db.tb_Incoming_Fabrics
                                     join y in db.tb_Branch on x.tb_Branch.BranchId equals y.BranchId
-                                    where  x.Amount > 100
+                                    where  x.Total_Amt > 100
                                     select x;
 
             ViewBag.CustomersAbove100 = CustomersAbove100.ToList();

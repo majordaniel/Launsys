@@ -12,17 +12,12 @@ namespace LaunSys.Data.Model_Generated
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_IncomingFabric
+    public partial class sysdiagram
     {
-        public int Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> DateSN { get; set; }
-        public string Cust_Name { get; set; }
-        public string Inv_No { get; set; }
-        public Nullable<int> Qty { get; set; }
-        public Nullable<decimal> Amount { get; set; }
-        public Nullable<int> BranchId { get; set; }
-    
-        public virtual tb_Branch tb_Branch { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

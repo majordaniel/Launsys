@@ -172,7 +172,7 @@
 
 
     //--------------------------perform the deletion-----------------------
-    var DeleteUser = function () {
+    var DeleteIncome = function () {
 
         $("#loaderDiv").show();
         var Id = $("#HiddenIncomeID").val();
@@ -217,6 +217,7 @@
     }
     //--------------------to pass the ID parameter for function----------------------------
     var AddEditIncome = function (Id) {
+    debugger
         var url = "/Income/AddEdit?Id=" + Id;
         $("#AddEditModalBody").load(url, function () {
             $("#AddEditIncomeModalDiv").modal("show");

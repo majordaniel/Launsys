@@ -19,10 +19,7 @@ namespace LaunSys.Data.Model_Generated
         {
             this.tb_Employees = new HashSet<tb_Employees>();
             this.tb_Expenses = new HashSet<tb_Expenses>();
-            this.tb_FabricDescription = new HashSet<tb_FabricDescription>();
             this.tb_Income = new HashSet<tb_Income>();
-            this.tb_IncomingFabric = new HashSet<tb_IncomingFabric>();
-            this.tb_Receipt = new HashSet<tb_Receipt>();
             this.tb_Users = new HashSet<tb_Users>();
         }
     
@@ -47,14 +44,9 @@ namespace LaunSys.Data.Model_Generated
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Expenses> tb_Expenses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_FabricDescription> tb_FabricDescription { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Income> tb_Income { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_IncomingFabric> tb_IncomingFabric { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_Receipt> tb_Receipt { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Users> tb_Users { get; set; }
+        public virtual tb_Incoming_Fabrics tb_Incoming_Fabrics { get; set; }
     }
 }

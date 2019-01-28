@@ -53,7 +53,7 @@ namespace LaunSys.Controllers
         {
             using (LaunSysDBEntities db = new LaunSysDBEntities())
             {
-                List<tb_IncomingFabric> incFab = db.tb_IncomingFabric.ToList<tb_IncomingFabric>();
+                List<tb_Incoming_Fabrics> incFab = db.tb_Incoming_Fabrics.ToList<tb_Incoming_Fabrics>();
                 return Json(new { data = incFab }, JsonRequestBehavior.AllowGet);
             }
         }

@@ -52,29 +52,38 @@
           
               
                     @{
-                        if (Session["UserRole"].ToString() == "Manager")
+                       // if (Session["UserRole"].ToString() != null)
+                       if (!string.IsNullOrEmpty(Session["UserRole"] as string))
                         {
-                            <a href="/Home/Index" class="logo">
-                              
-                                <!-- mini logo for sidebar mini 50x50 pixels -->
-                                <span class="logo-mini"><b>L</b>S</span>
-                                <!-- logo for regular state and mobile devices -->
-                                <span class="logo-lg"><b>Laun</b>Sys</span>
-                            </a>
-                        }
-                        else if(Session["UserRole"].ToString() == "Admin")
-                        {
-                            <a href = "/Clients/Index" class="logo">
-                            <!-- mini logo for sidebar mini 50x50 pixels -->
-                            <span class="logo-mini"><b>L</b> S</span>
-                            <!-- logo for regular state and mobile devices -->
-                            <span class="logo-lg"><b>Laun</b> Sys</span>
-                            </a>
 
+                     
+                            if (Session["UserRole"].ToString() == "Manager")
+                            {
+                                <a href="/Home/Index" class="logo">
+
+                                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                                    <span class="logo-mini"><b>L</b>S</span>
+                                    <!-- logo for regular state and mobile devices -->
+                                    <span class="logo-lg"><b>Laun</b>Sys</span>
+                                </a>
+                            }
+                            else if (Session["UserRole"].ToString() == "Admin")
+                            {
+                                <a href="/Clients/Index" class="logo">
+                                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                                    <span class="logo-mini"><b>L</b> S</span>
+                                    <!-- logo for regular state and mobile devices -->
+                                    <span class="logo-lg"><b>Laun</b> Sys</span>
+                                </a>
+
+                                }
+                            }
+                            else
+                            {
+                                Response.Redirect(Url.Action("Login", "Access"));
+                            }
                         }
 
-                    }
-              
 
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -411,8 +420,7 @@
 
                         <ul class="treeview-menu">
                             <li><a href="/Income/Index"><i class="fa fa-circle-o"></i> Income</a></li>
-                            <li><a href=""><i class="fa fa-circle-o"></i> Expensis</a></li>
-                            <li><a href=""><i class="fa fa-circle-o"></i> Receipts</a></li>
+                            <li><a href="/Expenses/Index"><i class="fa fa-circle-o"></i> Expensis</a></li>
                         </ul>
                     </li>
                     @* ---------------------------------------------------------------------
@@ -443,8 +451,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-circle-o"></i> Incoming Fabrics</a></li>
-                            <li><a href=""><i class="fa fa-circle-o"></i> Fabric Descriptions</a></li>
+                            <li><a href="/IncomingFabrics/index"><i class="fa fa-circle-o"></i> Incoming Fabrics</a></li>
+                            @*<li><a href=""><i class="fa fa-circle-o"></i> Fabric Descriptions</a></li>*@
 
                         </ul>
                     </li>
@@ -517,7 +525,7 @@
                                 Response.Redirect("Access/Login");
                             }
                         }*@
-                    @if (@Session["UserRole"].ToString() == "Manager")
+                    @if (!string.IsNullOrEmpty(Session["UserRole"] as string) && @Session["UserRole"].ToString() == "Manager")
                     {
                         <li class="treeview">
                             <a href="#">
@@ -534,7 +542,7 @@
                     }
                     else
                     {
-                        <li class="treeview hidden">
+                        <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-calendar"></i> <span>Reports</span>
                                 <span class="pull-right-container">
@@ -543,7 +551,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Management Reports</a></li>
+                                <li><a href="#"><i class="fa fa-circle-o"></i> Administrative Reports</a></li>
                             </ul>
                         </li>
                     }
@@ -920,7 +928,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
-
+    @RenderSection("scripts",false)
 
 </body>
 

@@ -31,7 +31,16 @@ namespace LaunSys.Controllers
             List<tb_Status> StatusList = db.tb_Status.ToList();
             ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
 
-            List<UsersViewModel> UsersList = db.tb_Users.Where(x => x.tb_Status.Status == true).Select(x => new UsersViewModel { Email = x.Email, Password = x.Password, Rolename = x.tb_Role.Rolename, Divisionname = x.tb_Division.Divisionname, Status=x.tb_Status.Status, Branchname = x.tb_Branch.Branchname, Deptname = x.tb_Department.Deptname, UserId =x.UserId}).ToList();
+            List<UsersViewModel> UsersList = db.tb_Users.Where(x => x.tb_Status.Status == true).Select(
+                x => new UsersViewModel {
+                    Email = x.Email,
+                    Password = x.Password,
+                    Rolename = x.tb_Role.Rolename,
+            Divisionname = x.tb_Division.Divisionname,
+                    Status =x.tb_Status.Status,
+                    Branchname = x.tb_Branch.Branchname,
+                    Deptname = x.tb_Department.Deptname,
+                    UserId =x.UserId}).ToList();
 
             ViewBag.ListOfUsers = UsersList;
 
@@ -127,12 +136,14 @@ namespace LaunSys.Controllers
         {
             LaunSysDBEntities db = new LaunSysDBEntities();
             bool result = false;
-            tb_Users User = db.tb_Users.SingleOrDefault(x => x.tb_Status.Status == true && x.UserId == UserId);
+            tb_Users User = db.tb_Users.SingleOrDefault(x => x.StatusId == 1 && x.UserId == UserId);
+           /// tb_Users User = db.tb_Users.SingleOrDefault(x => x.tb_Status.Status == true && x.UserId == UserId);
 
             if (User != null)
             {
                 //set the customer id to true, there fore hide it from the table\
-                User.tb_Status.Status = false;
+                //User.tb_Status.Status = false;
+                User.StatusId = 2;
                 db.SaveChanges();
                 result = true;
             }

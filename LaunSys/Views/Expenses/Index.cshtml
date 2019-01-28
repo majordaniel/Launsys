@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EXOENSES INFORMATION PANEL</h2>
+<h2>EXPENSES INFORMATION PANEL</h2>
 <style>
     .modal-dialog {
         width: 300px;
@@ -34,15 +34,15 @@
 <div class="row">
     <div classs="form-group col-lg-12" style="margin-left:20px;margin-right:20px">
         @*------------------button for add new data -------------------------------------*@
-        <a href="#" class="btn btn-primary btn-block btn-lg" onclick="AddEditExpenses(0)" style="margin-bottom:20px">New Income</a>
+        <a href="#" class="btn btn-primary btn-block btn-lg" @*id ="btnAddEdit"*@ onclick="AddEditExpenses(0)" style="margin-bottom:20px">New Expenses</a>
 
         @*------------------ --------------------------------------------------------*@
-        <table class="table table-responsive table-striped display" id="ExpensesTable" style="margin-top:20px">
+        <table class="table table-responsive  table-striped display" id="ExpensesTable" style="margin-top:20px">
             <thead>
                 <tr>
 
                     <th>Date</th>
-                    <th>Inc_SN</th>
+                    <th>Exp_SN</th>
                     <th>Description</th>
                     <th>Inv_No</th>
                     <th>Amount</th>
@@ -59,7 +59,7 @@
                     {
                         <tr id="row_@item.Id">
                             <td>@item.Date</td>
-                            <td>@item.Inc_SN</td>
+                            <td>@item.Exp_SN</td>
                             <td>@item.Description</td>
                             <td>@item.Inv_No</td>
                             <td>@item.Amount</td>
@@ -112,8 +112,9 @@
                         <a href="#" class="close" data-dismiss="modal">&times;</a>
                     </div>
                     <div class="modal-body" id="SingularInfoDiv">
-
+                        @*---------append the Partial view to this portion of the modal body---*@
                         @Html.Partial("SingleExpensesView");
+                        @*---------------------------------------------------------------------*@
 
                     </div>
                     <div class="modal-footer">
@@ -123,7 +124,7 @@
             </div>
         </div>
         @*------------------------------------------Add/EDIT modal-------------------------------------------------*@
-        <div class="modal fade" id="AddEditIncomeModalDiv">
+        <div class="modal fade" id="AddEditExpensesModalDiv">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -147,7 +148,9 @@
 
         </div>*@
 </div>
-
+@section scripts{
+    
+   
 <script>
 
   $(function () {
@@ -161,7 +164,71 @@
     })
   })
 
-    //
+    //--------------------confirm deletion of the record----------
+  var ConfirmDelete = function (Id){
+      $("#HiddenExpensesID").val(Id);
+      $("#DeleteModal").modal('show');
+  }
+    // --------------to perform the deletion----------
+  var DeleteExpenses = function(){
+  
+      $("#loaderDiv").show();
+      var IdtoDelete= $("#HiddenExpensesID").val();
 
+      $.ajax({
+          type: "POST",
+          url: "/Expenses/DeleteExpenses",
+          data: { Id: IdtoDelete },
+          success: function (result) {
 
+              $("#loaderDiv").hide();
+              alert("Expenses Deleted");
+              $("#DeleteModal").modal("hide");
+              $("#row_" + Id).remove();
+          }
+      })
+      //----------------------to display a single expenses detail
+      var ShowExpenses = function(IdOfTheExpensesRecord){
+          $.ajax({
+              type: "POST",
+              url: "/Expenses/ViewExpenses",
+              data: { Id: IdOfTheExpensesRecord },
+              success: function (response) {
+                  //-------here first open the modal--------
+                  $("#ViewSingleUserModal").modal("show");
+                  //--------then pass the response to the modal body-----
+                  $("#SingularInfoDiv").html(response);
+              }
+          })
+      }
+      //-----------------FOR THE ADD AND EDIT------------
+      var AddEditExpenses = function(Id){
+          var url="/Expenses/AddEdit?Id="+Id;
+          //-append to the Body of the AddEditModal
+          $("#AddEditModalBody").load(url,function(){
+              //open the Modal at the same time
+              $("#AddEditExpensesModalDiv").modal("show");
+          })
+
+      }
+      function AddEditExpenses() {
+          var url="/Expenses/AddEdit?Id="+Id;
+          //-append to the Body of the AddEditModal
+          $("#AddEditModalBody").load(url,function(){
+              //open the Modal at the same time
+              $("#AddEditExpensesModalDiv").modal("show");
+          })
+      }
+
+      //$("#btnAddEdit").click(function () {
+      //    var url = "/Expenses/AddEdit?Id=" + Id;
+      //    //-append to the Body of the AddEditModal
+      //    $("#AddEditModalBody").load(url, function () {
+      //        //open the Modal at the same time
+      //        $("#AddEditExpensesModalDiv").modal("show");
+      //    })
+      //});
+  }
 </script>
+
+}

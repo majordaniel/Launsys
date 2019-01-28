@@ -34,7 +34,19 @@ namespace LaunSys.Controllers
             AllDropDown();
             // the Listings
 
-            List<IncomesViewModel> IncomeList = db.tb_Income.Where(x => x.tb_Status.Status == true).Select(x => new IncomesViewModel { Date = x.Date, Inc_SN = x.Inc_SN, Description = x.Description, Inv_No = x.Inv_No, Amount = x.Amount, Branchname = x.tb_Branch.Branchname, Id = x.Id }).ToList();
+            List<IncomesViewModel> IncomeList = db.tb_Income.Where(x => x.tb_Status.Status == true).Select(x => new IncomesViewModel
+            {
+                Date = x.Date,
+                Inc_SN = x.Inc_SN,
+                Description = x.Description,
+                Inv_No = x.Inv_No,
+                Amount = x.Amount,
+                Branchname = x.tb_Branch.Branchname,
+                Id = x.Id,
+                Status = x.tb_Status.Status,
+                StatusId = x.StatusId
+            }).ToList();
+
             ViewBag.ListOfIncomeData = IncomeList;
 
 
@@ -110,12 +122,16 @@ namespace LaunSys.Controllers
         {
             LaunSysDBEntities db = new LaunSysDBEntities();
             bool result = false;
-            tb_Income Income = db.tb_Income.SingleOrDefault(x => x.tb_Status.Status == true && x.Id == Id);
+            //tb_Income Income = db.tb_Income.SingleOrDefault(x => x.StatusId == 1 && x.Id == Id);
+            tb_Income Income = db.tb_Income.SingleOrDefault
+                (x => x.tb_Status.Status == true && x.Id == Id);
+
 
             if (Income != null)
             {
                 //set the customer id to true, there fore hide it from the table\
-                Income.tb_Status.Status = false;
+                // Income.tb_Status.Status = false;
+               Income.StatusId = 2;
                 db.SaveChanges();
                 result = true;
             }
@@ -154,6 +170,9 @@ namespace LaunSys.Controllers
 
             List<tb_Status> StatusList = db.tb_Status.ToList();
             ViewBag.VStatusLists = new SelectList(StatusList, "StatusId", "Status");
+
+            //initialize the View model responsible for the Editing
+            //To get the record that is to be edited
 
             IncomesViewModel Model = new IncomesViewModel();
 
