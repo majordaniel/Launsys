@@ -27,10 +27,9 @@ namespace LaunSys.Data.Model_Generated
         public string Receipt_No { get; set; }
         public Nullable<int> Total_Amt { get; set; }
         public Nullable<int> BranchId { get; set; }
-        public string Recorded_By { get; set; }
         public string Branch_Name { get; set; }
+        public string Recorded_By { get; set; }
     
-        public virtual tb_Branch tb_Branch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Incoming_Fabric_Desc> tb_Incoming_Fabric_Desc { get; set; }
     }

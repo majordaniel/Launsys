@@ -47,6 +47,5 @@ namespace LaunSys.Data.Model_Generated
         public virtual ICollection<tb_Income> tb_Income { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Users> tb_Users { get; set; }
-        public virtual tb_Incoming_Fabrics tb_Incoming_Fabrics { get; set; }
     }
 }

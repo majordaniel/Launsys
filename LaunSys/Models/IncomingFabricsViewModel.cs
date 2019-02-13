@@ -11,14 +11,14 @@ namespace LaunSys.Models
 
         public int IncFabId { get; set; }
         public Nullable<int> CustomerId { get; set; }
-        public string Customer_Name { get; set; }
+       // public string Customer_Name { get; set; }
         public Nullable<System.DateTime> Date_Recorded { get; set; }
         public string Receipt_No { get; set; }
         public Nullable<int> Total_Amt { get; set; }
         public Nullable<int> BranchId { get; set; }
         public string Recorded_By { get; set; }
 
-        public string Branchname { get; set; }
+        //public string Branch_Name { get; set; }
 
 
 

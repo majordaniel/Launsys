@@ -7,56 +7,58 @@
 
 <div class="row">
 
-        <div class="col-sm-6">
-            <span>Customer</span>
+    <div class="col-sm-6">
+        <span>Customer</span>
 
-            @*------------this select dropdown list only pass the Customer name as the Value----------*@
-            <select id="SelCustname" class="form-control">
-               <option value="No Name">--------select Name---------</option>
-               @foreach (var item in ViewBag.AllCustomers)
-               {
-                   @*<option value="@item"> @item</option>*@
-                @*<option value="@item.Id"> @item.Id - @item.Name </option>*@
-                <option value="@item.Name"> @item.Id - @item.Name </option>
-               }
-            </select>
+        @*------------this select dropdown list only pass the Customer name as the Value----------*@
+        <select id="SelCustname" class="form-control">
+            <option value="No Name">--------select Name---------</option>
+            @foreach (var item in ViewBag.AllCustomers)
+            {
+                @*<option value="@item"> @item</option>*@
 
-
-            <span>Recept No:</span><input type="text" name="" class="form-control" id="txtRecieptNo" value="" placeholder="Enter Reciept No" />
-       
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6">
-          
-            <span>Total Amount:</span><input type="text" name="" class="form-control" id="txtTotalAmount" value="" placeholder="Enter Total Amount" />
-
-            <span>Branch</span>
-            @*------------this select dropdown list only pass the BranchID as the Value----------*@
-            <select id="SelBranchId" class="form-control"> 
-
-                <option value=""> --------select Branch---------</option>
-    @foreach (var item in ViewBag.AllBranches)
-    {
-        @*<option value="@item"> @item</option>*@
-        <option value="@item.BranchId"> @item.BranchName</option>
-
-        
-    }
+                @*< option value="@item.Name"> @item.Id - @item.Name </option>*@
+               <option value="@item.Id"> @item.Id - @item.Name </option>
+               
+            }
+        </select>
 
 
-            </select>
-        </div>
+        <span>Recept No:</span><input type="text" name="" class="form-control" id="txtRecieptNo" value="" placeholder="Enter Reciept No" />
 
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h3><span>Fabrics Details and Descriptions</span></h3>
-        </div>
-      
+
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+
+        <span>Total Amount:</span><input type="text" name="" class="form-control" id="txtTotalAmount" value="" placeholder="Enter Total Amount" />
+
+        <span>Branch</span>
+        @*------------this select dropdown list only pass the BranchID as the Value----------*@
+        <select id="SelBranchId" class="form-control">
+
+            <option value=""> --------select Branch---------</option>
+            @foreach (var item in ViewBag.AllBranches)
+            {
+                @*<option value="@item"> @item</option>*@
+                <option value="@item.BranchId"> @item.BranchName</option>
+
+
+            }
+
+
+        </select>
     </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h3><span>Fabrics Details and Descriptions</span></h3>
+    </div>
+
+</div>
 
 <div class="row">
     <table class="table table-bordered">
@@ -80,10 +82,10 @@
                 <input type="text" class="form-control" id="txtUnitPrice" value="" placeholder="Enter Unit Price" />
                 <span>Ref Unit Price required</span>
             </td>
-            <td>
+            @*<td>
                 <input type="text" class="form-control" id="txtTotal" value="" placeholder="Enter Total" />
                 <span>Ref Total Amount required</span>
-            </td>
+            </td>*@
 
 
             <td>
@@ -107,23 +109,208 @@
 @section Scripts{
     <script>
         $(document).ready(function myfunction() {
+            //declare an empty array for the Incoming fabric List
 
-    //Add button click
-            //validate inpute items before adding to list
+            var IncomingFabricDetailsList = [];
 
-     //Add the Items to list               
+            //Add button click
+
+            $('#btnAddDescription').click(function () {
+                //validate the Description data before appending to the list
+                //validate inpute items before adding to list
+                var isValid = true;
+                if ($('#txtDesc').val().trim() == '') {
+                    isValid = false;
+                    $('#txtDesc').siblings('span.error').css('visibility', 'visible');
+                }
+                else {
+                    $('#txtDesc').siblings('span.error').css('visibility', 'hidden');
+                }
+                //QTY
+                if ($('#txtQty').val().trim() == '') {
+                    isValid = false;
+                    $('#txtQty').siblings('span.error').css('visibility', 'visible');
+                }
+                else {
+                    $('#txtQty').siblings('span.error').css('visibility', 'hidden');
+                }
+
+                //txtUnitPrice
+                if ($('#txtUnitPrice').val().trim() == '') {
+                    isValid = false;
+                    $('#txtUnitPrice').siblings('span.error').css('visibility', 'visible');
+                }
+                else {
+                    $('#txtUnitPrice').siblings('span.error').css('visibility', 'hidden');
+
+                    var totalAmt = $('#txtQty').val() * $('#txtUnitPrice').val();
+                }
+
+
+                ////txtTotal
+                //if ($('#txtTotal').val().trim() == '') {
+                //    isValid = false;
+                //    $('#txtTotal').siblinga('span.error').css('visibility', 'visible');
+                //}
+                //else {
+                //    $('#txtTotal').siblinga('span.error').css('visibility', 'hidden');
+
+                //}
+
+                //-----------------------do some internal calculations to calculate the total AMount 
+                var $totalTranasactionAmount = 0
+                $totalTranasactionAmount = $totalTranasactionAmount + totalAmt
+
+                //after the validation
+                //Add the Items to list
+                if (isValid) {
+                    IncomingFabricDetailsList.push({
+
+                        Description: $('#txtDesc').val().trim(),
+                        Qty: $('#txtQty').val().trim(),
+                        Unit_Price: $('#txtUnitPrice').val().trim(),
+                        Total_Amt: totalAmt
+                    });
+
+                    GenerateFabricTable();
+                }
+
+            })
 
 
 
- //SAVING ALL RECORDS TO THE DATABASE
-
-            //validate / Check if the items table is empty
 
 
-        })
+
+            //SAVING ALL RECORDS TO THE DATABASE
+
+            $('#btnSaveAll').click(function () {
+
+                var IsAllValid = true;
+                //validateh that the record is not empty
+                if (IncomingFabricDetailsList.length == 0) {
+
+                    $('#RefDescriptionList').html('<span style ="color:red">Please Add Record</span>');
+                    IsAllValid = false;
+                }
+                //if the over alvalidation is passed
+                if (IsAllValid) {
+
+                    //DO THE SAVING OF THAT RECORD
+                    var data = {
+
+
+                        CustomerId: $('#SelCustname').val(),
+                        Customer_Name: $('#SelCustname').val(),
+                        // Date_Recorded : ---------- it will be inserted to the database from the controller
+                        Receipt_No: $('#txtRecieptNo').val(),
+                        //Total_Amt: $totalTranasactionAmount,
+
+                        Total_Amt: $('#txtTotalAmount').val(),
+
+                        BranchId: $('#SelBranchId').val(),
+                        // Recorded_By : ---------- it will be inserted to the database from the controller
+                        Branchname: $('#SelBranchId').val(),
+
+                        Incoming_Fabric_Desc: IncomingFabricDetailsList
+                    }
+
+                    $(this).val('---please wait----')
+
+                    //declare the ajax to call the controller method
+
+                    $.ajax({
+                        url: '/IncomingFabrics/SaveIncomingfabric',
+                        type: 'POST',
+                     
+                        data: JSON.stringify(data),
+                        dataType: "JSON",
+                        contentType: "application/json",
+                        success: function (d) {
+                            //check is Successfully saved to database
+                            if (d.status == true) {
+                                alert('The Incoming fabric is successfully saved');
+
+
+                                //clear form
+                                RefDet = [];
+                                //$('#txtRecieptNo').val('');
+                                $('#txtTotalAmount').val('');
+                                $('#txtDesc').val('');
+                                $('#txtQty').val('');
+                                $('#txtUnitPrice').val('');
+                               // $('#txtTotal').val('');
+                                $('#RefDescriptionList').empty();
+                            }
+                            else {
+                                alert("Failed to Save Incoming fabric Details")
+                            }
+                            $('#btnSaveAll').val('SAVE INCOMING FABRIC');
+                        }
+                        //,
+                        //error: function () {
+                        //    alert('Error, Please try Again...');
+                        //    $('#btnSaveAll').val('SAVE INCOMING FABRIC');
+                        //}
+                    });
+                }
+
+            })
+
+
+
+
+            //function to show the added items in the Table
+
+
+            function GenerateFabricTable() {
+                if (IncomingFabricDetailsList.length > 0) {
+                    // create a virtual table
+                    var $DescTable = $('<table class= "table table-boardered"/>');
+                    //append the descriptions to the virtual table heading
+
+                        //<td>Description:</td>
+                        //<td>Qty:</td>
+                        //<td>Unit Price:</td>
+                        //<td>Total:</td>
+
+                    $DescTable.append('<thead><tr><th>Description </th><th> Qty</th><th>Unit Price </th><th>Total </th></tr></thead>');
+                    // create the virtual table body
+
+                    var $DescTableBody = $('<tbody>');
+                    //set the elements of the Virtual table body to be the 
+                    //description data/parameter
+                    $.each(IncomingFabricDetailsList, function (i, val) {
+
+                     //created a virtual row with the parameters PUSHED above
+                        var $row = $('<tr/>');
+                        $row.append($('<td/>').html(val.Description));
+                        $row.append($('<td/>').html(val.Qty));
+                        $row.append($('<td/>').html(val.Unit_Price));
+                        $row.append($('<td/>').html(val.Total_Amt));
+
+                        //append the row parameters to the table body
+                        $DescTableBody.append($row);
+
+                        //clear the text box for a new value to be inputed
+                        $('#txtDesc').val('');
+                        $('#txtQty').val('');
+                        $('#txtUnitPrice').val('');
+                    })
+
+                    //append the virtual table body to the virtual table created
+                    $DescTable.append($DescTableBody);
+                    //set the virtual table to the position referenced on the interface for 
+                    //positioning
+
+                    $('#RefDescriptionList').html($DescTable);
+
+                }
+            }
+        });
     </script>
-    
-    }
+
+}
 
 
 

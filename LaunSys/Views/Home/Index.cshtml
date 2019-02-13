@@ -1,4 +1,5 @@
 ﻿@model LaunSys.Models.ClientsViewModel
+    @using LaunSys.Controllers;
 
 @{
     ViewBag.Title = "Home Page";
@@ -171,7 +172,7 @@
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>1000</h3>
+                    <h3>xxxx</h3>
                     <p>Delivered </p>
                 </div>
                 <div class="icon">
@@ -194,14 +195,14 @@
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
-      
+
         <!-- ./col -->
         <div class="col-lg-4 col-xs-4 col-sm-4">
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>@ViewBag.TotNoOfFabrics</h3>
-                    <p>Total No of Fabrics</p>
+                    <h3>####</h3>
+                    <p>xxxxxxx</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -218,8 +219,8 @@
     <div class="row">
 
         <!-- ./col -->
-     
-     
+
+
         <div class="col-lg-4 col-xs-4 col-sm-4">
             <!-- small box -->
             <div class="small-box bg-yellow">
@@ -268,64 +269,54 @@
 
 
 
+    @*---------------------------to display incoming fabric details----------------------------------------*@
+
+        <table class="table table-responsive table-striped display" id="ClientsTable" style="margin-top:20px">
+            <thead>
+                <tr>
+            <th>Incoming Fab Id</th>
+                    <th>Customer Name</th>
+                    <th>Branch</th>
+                    <th>Total_Amt</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.CustomersAbove100 != null)
+                  {
+                                foreach (var item in ViewBag.CustomersAbove100)
+                                {
+                                    <tr>
+                                     <td>@item.IncFabId</td>
+                                        <td>@item.Customer_Name</td>
+                                        <td>@item.Branchname</td>
+                                        <td>@item.Total_Amt</td>
+                                    </tr>
+                             }
+                }
+            </tbody>
+        </table>
+
+        @*---------------------------------------------------------------------------------------------*@
+
+    @*IncFabId = a.IncFabId,
+        Customer_Name = a.Customer_Name,
+        Branchname = b.Branchname,
+        Total_Amt = c.Total_Amt*@
 
 
-    <table class="table table-responsive table-striped display" id="ClientsTable" style="margin-top:20px">
-        <thead>
-            <tr>
-                <th>Customer Name</th>
-                <th>Invoice Number</th>
-                <th>Branch</th>
 
-                @*<th>Gender</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Walk in Date</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>*@
-            </tr>
-        </thead>
-        <tbody>
-            @if (ViewBag.CustomersAbove100 != null)
+
+    @*@{
+            if (ViewBag.CusAbove100 != null)
             {
-                foreach (var item in ViewBag.CustomersAbove100)
+                foreach (var Clien in ViewBag.CusAbove100)
                 {
-                    @*<tr id="row_@item.CustID">*@
-                    <tr>
-                        <td>@item.Cust_Name</td>
-                        <td>@item.Inv_No</td>
-                        <td>@item.tb_Branch.Branchname</td>
-
-                        @* <td>@item.Title</td>
-                            <td>@item.SurName</td>
-                            <td>@item.OtherNames</td>
-                            <td>@item.Gendername</td>
-                            <td>@item.Cust_Address</td>
-                            <td>@item.Phone</td>
-                            <td>@item.Email</td>
-                            <td>@item.CreatedDate</td>
-                            <td><a class="btn btn-xs btn-danger" href="#" onclick="ConfirmDelete(@item.CustID)"><i class="glyphicon glyphicon-trash"></i></a></td>
-                            <td><a class="btn btn-xs btn-success" href="#" onclick="ShowClient(@item.CustID)"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                            <td><a class="btn btn-xs btn-success" href="#" onclick="AddEditClient(@item.CustID)"><i class="glyphicon glyphicon-pencil"></i></a></td>*@
-
-                    </tr>
+                    @Clien.Cust_Name;
+                    @Clien.Inv_No;
+                    @Clien.Branch
                 }
             }
-        </tbody>
-    </table>
-    @*@{ 
-        if (ViewBag.CusAbove100 != null)
-        {
-            foreach (var Clien in ViewBag.CusAbove100)
-            {
-                @Clien.Cust_Name;
-                @Clien.Inv_No;
-                @Clien.Branch
-            }
-        }
-    }*@
+        }*@
 
     <!-- /.row -->
     <!-- Main row -->
