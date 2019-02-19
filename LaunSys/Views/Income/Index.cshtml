@@ -146,11 +146,14 @@
 
         </div>*@
 </div>
+@section scripts{
 
-<script>
+
+
+    <script>
 
   $(function () {
-      $('#UserTable').DataTable({
+      $('#IncomeTable').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
@@ -159,7 +162,7 @@
       'autoWidth'   : false
     })
   })
-</script>
+    </script>
 <script>
 
 
@@ -217,7 +220,7 @@
     }
     //--------------------to pass the ID parameter for function----------------------------
     var AddEditIncome = function (Id) {
-    debugger
+    //debugger
         var url = "/Income/AddEdit?Id=" + Id;
         $("#AddEditModalBody").load(url, function () {
             $("#AddEditIncomeModalDiv").modal("show");
@@ -225,3 +228,4 @@
 
     }
 </script>
+    }

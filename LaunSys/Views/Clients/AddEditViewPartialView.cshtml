@@ -6,13 +6,6 @@
 
 @model LaunSys.Models.ClientsViewModel
 
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
-
-
 <h2>Add Edit Partial View</h2>
 
 <form id="clientInfoForm">
@@ -34,7 +27,7 @@
 
     @Html.TextBoxFor(Model => Model.Phone, new { @id = "phone", @class = "form-control", @placeholder = "Enter Phone No" })
     @Html.TextBoxFor(Model => Model.Email, new { @id = "email", @class = "form-control", @placeholder = "Enter Email" })
-    @Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control datepicker", @name= "walkindate", @id = "walkindate", @placeholder = "Enter date, dd/MM/YYYY" })
+    @Html.TextBoxFor(Model => Model.CreatedDate, new { @class = "form-control datepicker", @id = "walkindate", @placeholder = "yyyy/mm/dd" })
 
     @*@Html.EditorFor(Model => Model.CreatedDate, new { htmlAttributes= new { @Value = Model.CreatedDate.ToString("MM/dd/yyyy"), @class = "form-control" } })*@
 
@@ -43,50 +36,12 @@
     
 
 </form>
-
 <div style="text-align:center; display:none" id="loaderDiv">
     <img src="~/Content/loading.gif" width="100" />
 </div>
 
-
-@section Scripts{
-    
-    <!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-
-
-
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-
-    @*<script>
-
-        $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy',
-            startDate: '-3d'
-        });
-
-    </script>*@
-
-<script>
-    $(document).ready(function(){
-        var date_input = $('input[name="walkindate"]'); //our date input has the name "date"
-      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-</script>
-
-
-
 
 <script>
     //function validate()
@@ -166,6 +121,3 @@
         })
     //})
 </script>
-
-
-}

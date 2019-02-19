@@ -154,7 +154,7 @@
 <script>
 
   $(function () {
-      $('#UserTable').DataTable({
+      $('#ExpensesTable').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
@@ -187,6 +187,8 @@
               $("#row_" + Id).remove();
           }
       })
+
+  }
       //----------------------to display a single expenses detail
       var ShowExpenses = function(IdOfTheExpensesRecord){
           $.ajax({
@@ -194,10 +196,11 @@
               url: "/Expenses/ViewExpenses",
               data: { Id: IdOfTheExpensesRecord },
               success: function (response) {
-                  //-------here first open the modal--------
-                  $("#ViewSingleUserModal").modal("show");
+              
                   //--------then pass the response to the modal body-----
                   $("#SingularInfoDiv").html(response);
+                  //-------here first open the modal--------
+                  $("#ViewSingleExpensesModal").modal("show");
               }
           })
       }
@@ -211,14 +214,16 @@
           })
 
       }
-      function AddEditExpenses() {
-          var url="/Expenses/AddEdit?Id="+Id;
-          //-append to the Body of the AddEditModal
-          $("#AddEditModalBody").load(url,function(){
-              //open the Modal at the same time
-              $("#AddEditExpensesModalDiv").modal("show");
-          })
-      }
+
+
+      //function AddEditExpenses() {
+      //    var url="/Expenses/AddEdit?Id="+Id;
+      //    //-append to the Body of the AddEditModal
+      //    $("#AddEditModalBody").load(url,function(){
+      //        //open the Modal at the same time
+      //        $("#AddEditExpensesModalDiv").modal("show");
+      //    })
+      //}
 
       //$("#btnAddEdit").click(function () {
       //    var url = "/Expenses/AddEdit?Id=" + Id;
@@ -228,9 +233,7 @@
       //        $("#AddEditExpensesModalDiv").modal("show");
       //    })
       //});
-  }
-
-  }
+ 
 
 
       //-------------------------alternatively---------------
@@ -246,4 +249,5 @@
   
 </script>
 
-}
+
+    }

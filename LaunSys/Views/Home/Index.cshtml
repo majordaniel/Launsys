@@ -186,7 +186,7 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>@ViewBag.TotIncome</h3>
+                    <h3>&#8358;@ViewBag.TotIncome</h3>
                     <p>Total Income</p>
                 </div>
                 <div class="icon">
@@ -273,11 +273,12 @@
 
         <table class="table table-responsive table-striped display" id="ClientsTable" style="margin-top:20px">
             <thead>
+                <caption class="text-center text-red text-bold">Customers Above &#8358;10000 Transactions</caption>
                 <tr>
             <th>Incoming Fab Id</th>
                     <th>Customer Name</th>
                     <th>Branch</th>
-                    <th>Total_Amt</th>
+                    <th>Total_Amt (&#8358;)</th>
                 </tr>
             </thead>
             <tbody>
@@ -289,7 +290,7 @@
                                      <td>@item.IncFabId</td>
                                         <td>@item.Customer_Name</td>
                                         <td>@item.Branchname</td>
-                                        <td>@item.Total_Amt</td>
+                                        <td>&#8358;@item.Total_Amt</td>
                                     </tr>
                              }
                 }

@@ -71,8 +71,16 @@ namespace LaunSys.Controllers
             var HighestCust = from x in db.tb_Incoming_Fabrics
                               join y in db.tb_Customers
                                 on x.CustomerId equals y.CustID
-                              where x.Total_Amt == amt
+
+                              //where x.Total_Amt == amt
+                              //select y.SurName.ToString() + " " + y.OtherNames.ToString();
+
+
+                                where y.CustID == x.CustomerId && x.Total_Amt == amt
+
                               select y.SurName.ToString() + " " + y.OtherNames.ToString();
+
+
             //select new
             //{
             //    Name = y.OtherNames.ToString() + " " + y.OtherNames.ToString()
@@ -137,13 +145,14 @@ namespace LaunSys.Controllers
 
             var highCustomers = from a in db.tb_Incoming_Fabrics
                                 join b in db.tb_Branch on a.BranchId equals b.BranchId
+                                join n in db.tb_Customers on a.CustomerId equals n.CustID
                                 join c in db.tb_Incoming_Fabric_Desc on a.IncFabId equals c.IncFabId
-                                where c.Total_Amt > 10
+                                where c.Total_Amt > 10000
 
                                 select new
                                 {
                                     IncFabId = a.IncFabId.ToString(),
-                                    Customer_Name = a.Customer_Name,
+                                    Customer_Name = n.SurName + " " + n.OtherNames,
                                     Branchname = b.Branchname,
                                     Total_Amt = c.Total_Amt.ToString(),
                                 };

@@ -24,7 +24,8 @@ namespace LaunSys.Controllers
             List<tb_Gender> GenderList = db.tb_Gender.ToList();
             ViewBag.VGenderLists = new SelectList(GenderList, "GenderID", "Gendername");
 
-            List<ClientsViewModel> ClientsList = db.tb_Customers.Where(x => x.IsNotActive == false).Select(x => new ClientsViewModel
+            List<ClientsViewModel> ClientsList = db.tb_Customers.Where
+                (x => x.IsNotActive == false).Select(x => new ClientsViewModel
             { Title=x.tb_Titles.Title,
                 SurName =x.SurName,
                 OtherNames =x.OtherNames,

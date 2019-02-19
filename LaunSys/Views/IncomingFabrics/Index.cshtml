@@ -12,14 +12,14 @@
 
         @*------------this select dropdown list only pass the Customer name as the Value----------*@
         <select id="SelCustname" class="form-control">
-            <option value="No Name">--------select Name---------</option>
+            <option value="">--------select Name---------</option>
             @foreach (var item in ViewBag.AllCustomers)
             {
                 @*<option value="@item"> @item</option>*@
 
                 @*< option value="@item.Name"> @item.Id - @item.Name </option>*@
                <option value="@item.Id"> @item.Id - @item.Name </option>
-               
+        
             }
         </select>
 
@@ -33,7 +33,7 @@
 <div class="row">
     <div class="col-sm-6">
 
-        <span>Total Amount:</span><input type="text" name="" class="form-control" id="txtTotalAmount" value="" placeholder="Enter Total Amount" />
+        <span>Total Amount:</span><input type="text" name="" class="form-control" id="txtTotalAmount"  readonly @*placeholder="Enter Total Amount"*@ />
 
         <span>Branch</span>
         @*------------this select dropdown list only pass the BranchID as the Value----------*@
@@ -75,7 +75,7 @@
                 <span>Ref Description required</span>
             </td>
             <td>
-                <input type="text" class="form-control" id="txtQty" value="" placeholder="Enter Qty" />
+                <input type="text" class="form-control" id="txtQty" value="" placeholder="Enter Qty"  />
                 <span>Ref Qty required</span>
             </td>
             <td>
@@ -107,12 +107,29 @@
 
 
 @section Scripts{
+
+
+    <script>
+
+  $(function () {
+      $('#ClientsTable').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+    </script>
+
+
     <script>
         $(document).ready(function myfunction() {
             //declare an empty array for the Incoming fabric List
 
             var IncomingFabricDetailsList = [];
-
+            var totalTranasactionAmount = 0;
             //Add button click
 
             $('#btnAddDescription').click(function () {
@@ -142,43 +159,53 @@
                 }
                 else {
                     $('#txtUnitPrice').siblings('span.error').css('visibility', 'hidden');
+                    //var incAmt = 0;
 
                     var totalAmt = $('#txtQty').val() * $('#txtUnitPrice').val();
+                    //incAmt = totalAmt;
                 }
 
-
-                ////txtTotal
-                //if ($('#txtTotal').val().trim() == '') {
-                //    isValid = false;
-                //    $('#txtTotal').siblinga('span.error').css('visibility', 'visible');
-                //}
-                //else {
-                //    $('#txtTotal').siblinga('span.error').css('visibility', 'hidden');
-
-                //}
-
                 //-----------------------do some internal calculations to calculate the total AMount 
-                var $totalTranasactionAmount = 0
-                $totalTranasactionAmount = $totalTranasactionAmount + totalAmt
-
+              
+           
                 //after the validation
                 //Add the Items to list
                 if (isValid) {
+
+                
+
                     IncomingFabricDetailsList.push({
 
                         Description: $('#txtDesc').val().trim(),
                         Qty: $('#txtQty').val().trim(),
                         Unit_Price: $('#txtUnitPrice').val().trim(),
                         Total_Amt: totalAmt
+
+
                     });
 
+                   
+
                     GenerateFabricTable();
+
+                    totalTranasactionAmount += totalAmt;
+
+                    // var NewAmt = GetTotal(totalAmt, totalTranasactionAmount);
+
+           
+
+                    $('#txtTotalAmount').val(totalTranasactionAmount);
+
                 }
 
             })
 
 
-
+            //function GetTotal(x, y) {
+               
+            //    return x + y;
+          
+            //}
 
 
 
@@ -215,6 +242,13 @@
                         Incoming_Fabric_Desc: IncomingFabricDetailsList
                     }
 
+                    if ($('#SelCustname').val() === "" || $('#SelBranchId').val() === "") {
+                        alert('Select Branch and Customer');
+                    }
+                    else {
+                            
+                   
+
                     $(this).val('---please wait----')
 
                     //declare the ajax to call the controller method
@@ -234,8 +268,10 @@
 
                                 //clear form
                                 RefDet = [];
-                                //$('#txtRecieptNo').val('');
+                                $('#txtRecieptNo').val('');
                                 $('#txtTotalAmount').val('');
+                                $('#SelBranchId').val('');
+                                $('#SelCustname').val('');
                                 $('#txtDesc').val('');
                                 $('#txtQty').val('');
                                 $('#txtUnitPrice').val('');
@@ -247,12 +283,14 @@
                             }
                             $('#btnSaveAll').val('SAVE INCOMING FABRIC');
                         }
-                        //,
-                        //error: function () {
-                        //    alert('Error, Please try Again...');
-                        //    $('#btnSaveAll').val('SAVE INCOMING FABRIC');
-                        //}
+                        ,
+                        error: function () {
+                            alert('Error, Please try Again...');
+                            $('#btnSaveAll').val('SAVE INCOMING FABRIC');
+                        }
                     });
+
+                    }
                 }
 
             })
@@ -304,6 +342,7 @@
                     //positioning
 
                     $('#RefDescriptionList').html($DescTable);
+                     //total = total + IncAmt
 
                 }
             }
