@@ -1,11 +1,8 @@
-﻿using System;
+﻿using LaunSys.Data.Model_Generated;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-
-using LaunSys.Models;
-using LaunSys.Data.Model_Generated;
 
 namespace LaunSys.Controllers
 {
@@ -25,20 +22,55 @@ namespace LaunSys.Controllers
         {
 
             //Total Income
-            var TotIncAmt = (from x in db.tb_Income select x.Amount).Sum();
-            ViewBag.TotIncome = TotIncAmt;
+            Nullable<int> TotIncAmt = 1;
+
+            //TotIncAmt = (int)(from x in db.tb_Income select x.Amount).Sum();
+            if (TotIncAmt.HasValue)
+            {
+                ViewBag.TotIncome = TotIncAmt;
+            }
+            else
+            {
+                ViewBag.TotIncome = TotIncAmt;
+            }
+
             //Total Expensis
-            var TotExpAmt = (from x in db.tb_Expenses select x.Amount).Sum();
-            ViewBag.TotExpensis = TotExpAmt;
+            Nullable<int> TotExpAmt = 1;
 
-            var Balance = TotIncAmt - TotExpAmt;
-            var RoundPerc = Balance / TotIncAmt * 100;
-            var PercProgress = (int) Math.Round(RoundPerc.Value);
-           
 
-            //% gain = 
-           
-            ViewBag.Gain = PercProgress;
+            //TotExpAmt = (int)(from x in db.tb_Expenses select x.Amount).Sum();
+
+            if (TotExpAmt != null)
+            {
+                ViewBag.TotExpensis = TotExpAmt;
+            }
+            else
+            {
+                ViewBag.TotExpensis = TotExpAmt;
+            }
+
+
+            Nullable<int> Balance = null;
+
+            Balance = TotIncAmt - TotExpAmt;
+            Nullable<int> RoundPerc = (int)(Balance / TotIncAmt * 100);
+
+            if (RoundPerc != null)
+            {
+                int PercProgress = (int)RoundPerc;
+
+                // (int) Math.Round(RoundPerc.Value);
+                //% gain = 
+
+                ViewBag.Gain = PercProgress;
+            }
+            else
+            {
+                ViewBag.Gain = 0;
+            }
+
+
+
 
             //total no of Fabrics
             // var TotNoOfFabrics = (from x in db.tb_Incoming_Fabrics select x.IncFabId).Count();
@@ -76,7 +108,7 @@ namespace LaunSys.Controllers
                               //select y.SurName.ToString() + " " + y.OtherNames.ToString();
 
 
-                                where y.CustID == x.CustomerId && x.Total_Amt == amt
+                              where y.CustID == x.CustomerId && x.Total_Amt == amt
 
                               select y.SurName.ToString() + " " + y.OtherNames.ToString();
 

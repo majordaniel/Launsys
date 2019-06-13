@@ -58,6 +58,7 @@ namespace LaunSys.Controllers
             return View();
         }
 
+
         public JsonResult SaveIncomingfabric(IncomingFabricsViewModel IncfabricData)
         {
             bool status = false;

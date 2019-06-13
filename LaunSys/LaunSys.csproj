@@ -7471,7 +7471,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1717</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2000/</IISUrl>
+          <IISUrl>http://localhost:3400/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
